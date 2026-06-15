@@ -1,0 +1,836 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AUREL JEWELS</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+  <style>
+    :root{
+      --bg:#FFFFFF;
+      --text:#1a1a1a;
+      --gold:#C9A961;
+      --gold-rgb:201,169,97;
+    }
+    html{scroll-behavior:smooth}
+    body{background:var(--bg); color:var(--text); font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;}
+
+    .gold-text{color:var(--gold)}
+
+    /* Fixed model backgrounds + overlay to keep crystal clear */
+    .fixed-model-bg{
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      overflow: hidden;
+      color: #111;
+    }
+    .fixed-model-bg > .container{
+      position: relative;
+      z-index: 1;
+    }
+    .fixed-model-overlay{
+      position:absolute;
+      inset:0;
+      background: rgba(255,255,255,0.42);
+      z-index:0;
+      pointer-events: none;
+    }
+
+    /* Hero video showcase — same style as store menu video */
+    .hero-video-wrap{
+      position:relative;
+      border-radius:1rem;
+      overflow:hidden;
+      border:1px solid rgba(201,169,97,0.35);
+      background:rgba(255,255,255,0.5);
+      box-shadow:0 25px 60px rgba(0,0,0,0.1);
+    }
+    .hero-video-wrap video{
+      width:100%;
+      height:280px;
+      object-fit:cover;
+      display:block;
+    }
+    @keyframes float-jewel{
+      0%,100%{ transform:translateY(0) scale(1); }
+      50%{ transform:translateY(-8px) scale(1.02); }
+    }
+    .hero-jewel-float{
+      animation:float-jewel 4s ease-in-out infinite;
+    }
+
+    /* Section spacing under sticky navbar */
+    .section-pad-top{padding-top:6rem;}
+
+    /* Glass cards per spec */
+    .glass-card{
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(201,169,97,0.3);
+      box-shadow: 0 18px 45px rgba(0,0,0,0.06);
+    }
+
+    .collection-card{
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .collection-card:hover{
+      transform: scale(1.05);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.10), 0 0 0 1px rgba(201,169,97,0.35);
+    }
+
+    /* Hero lattu spin */
+    @keyframes spin-360{from{transform:rotateY(0deg);}to{transform:rotateY(360deg);}}
+    .spin-lattu{animation:spin-360 8s linear infinite; transform-style:preserve-3d;}
+
+    /* Ensure navbar is glass */
+    .nav-glass{
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border-bottom: 1px solid rgba(201,169,97,0.25);
+    }
+
+    /* Dropdown menu visibility handling */
+    .dropdown-menu{opacity:0; transform: translateY(-6px) scale(0.98); pointer-events:none; transition:.18s ease;}
+    .dropdown-open .dropdown-menu{opacity:1; transform: translateY(0) scale(1); pointer-events:auto;}
+
+    /* Mobile menu button (basic) */
+    .menu-btn{border:1px solid rgba(201,169,97,0.35);}
+
+    /* AOS safeguard for reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      [data-aos]{transition:none !important; transform:none !important;}
+    }
+  </style>
+  <style>
+    /* Task 5: THEME - Glass Effect for cards */
+    .product-card, .category-card, .contact-card, .engraving-preview-card, .metric-content-box, .collection-card, .item-card, .finish-selection-box {
+      background: rgba(255, 255, 255, 0.6) !important;
+      backdrop-filter: blur(10px) !important;
+      -webkit-backdrop-filter: blur(10px) !important;
+      border: 1px solid rgba(255,255,255,0.4) !important;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07) !important;
+    }
+    
+    /* Ensure text is visible and layout correct */
+    .smart-showcase h2, .smart-showcase p, .smart-showcase h3, .smart-showcase li, .smart-showcase span {
+      color: #1a1a1a !important;
+    }
+  </style>
+    <style>
+      /* Section Backgrounds Overlay */
+      body {
+         background-color: #FFFFFF !important;
+         color: #1a1a1a !important;
+      }
+      section, header, footer, main {
+          position: relative;
+          background-attachment: fixed !important;
+          background-size: cover !important;
+          background-position: center !important;
+      }
+      section::before, header::before, footer::before, main::before {
+          content: "";
+          position: absolute;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background: rgba(255, 255, 255, 0.42) !important;
+          z-index: 0;
+          pointer-events: none;
+      }
+      section > *, header > *, footer > *, main > * {
+          position: relative;
+          z-index: 1;
+      }
+      
+      /* All cards glass effect */
+      .product-card, .category-card, .contact-card, .engraving-preview-card, .metric-content-box, .collection-card, .item-card, .finish-selection-box {
+          background: rgba(255, 255, 255, 0.6) !important;
+          backdrop-filter: blur(10px) !important;
+          -webkit-backdrop-filter: blur(10px) !important;
+          border: 1px solid rgba(255,255,255,0.4) !important;
+          box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07) !important;
+      }
+      
+      
+      /* Text Colors override for white theme */
+      body, p, span, div, a, li { color: #1a1a1a; }
+      h1, h2, h3, h4, h5, h6, .sec-title h2, .hero h1, .smart-showcase h2, .logo { color: #1a1a1a !important; }
+      .category-overlay h3, .product-info-box h3 { color: #1a1a1a !important; }
+      .dropdown-item { color: #1a1a1a !important; }
+      .nav-links a { color: #1a1a1a !important; }
+
+      h1, h2, h3, h4, h5, h6, p, span, li, a {
+          color: #1a1a1a;
+      }
+      .sec-title h2, .hero h1, .smart-showcase h2, .logo {
+          color: #1a1a1a !important;
+      }
+    </style>
+
+    <style id="site-spacing-theme">
+      /* Transparent glass overlay — model backgrounds stay visible */
+      section::before, header::before, footer::before, main::before {
+        background: rgba(255, 255, 255, 0.42) !important;
+      }
+      .fixed-model-overlay {
+        background: rgba(255, 255, 255, 0.42) !important;
+      }
+      /* Reduced spacing sitewide */
+      .collection-section, .shop-section, .contact-section,
+      .smart-showcase, .about-section, .bespoke-cta,
+      .engraving-section, .stacking-section, .categories-section {
+        padding: 3.5rem 6% !important;
+      }
+      .contact-section { padding: 3.5rem 6% !important; }
+      .sec-title, .section-header { margin-bottom: 2rem !important; }
+      .category-hero { height: 300px !important; min-height: 300px !important; }
+      .page-hero { padding: 5rem 5% 3rem !important; }
+      .section-pad-top { padding-top: 4.5rem !important; }
+      .features-strip, .promo-strip, .category-strip { margin: 0 !important; }
+      /* Rings-matched product grid for pendants / bracelets / bangles */
+      .product-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 2.5rem !important;
+        max-width: none !important;
+        margin: 0 !important;
+      }
+      .product-img-box {
+        height: 280px !important;
+        aspect-ratio: unset !important;
+      }
+      .product-img-box img {
+        width: 100% !important;
+        height: 300px !important;
+        object-fit: cover !important;
+        border-radius: 12px !important;
+        display: block !important;
+      }
+      .card-image { height: 280px !important; }
+      .card-image img {
+        width: 100% !important;
+        height: 300px !important;
+        object-fit: cover !important;
+      }
+    </style>
+
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header id="top" class="fixed top-0 left-0 right-0 z-50 nav-glass" style="background-image: url('updated store/images/WhatsApp Image 2026-06-09 at 11.18.50 AM.jpeg');">
+    <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+      <a href="#home" class="flex items-center gap-3 group" aria-label="Aurel Jewels Home">
+        <span class="text-2xl sm:text-3xl font-bold tracking-wider" style="font-family: 'Playfair Display', serif; color: var(--gold);">AUREL</span>
+        <span class="text-2xl sm:text-3xl font-bold tracking-wider" style="font-family: 'Playfair Display', serif;">JEWELS</span>
+      </a>
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#home" class="text-[13px] uppercase tracking-[0.18em] font-semibold hover:text-[var(--gold)]">HOME</a>
+
+        <!-- Collections dropdown with original FontAwesome icons -->
+        <div class="relative" id="collections">
+          <button id="collectionsBtn" type="button" class="flex items-center gap-2 text-[13px] uppercase tracking-[0.18em] font-semibold hover:text-[var(--gold)]" aria-expanded="false" aria-controls="collectionsMenu">
+            COLLECTIONS
+            <i class="fa-solid fa-chevron-down" style="color: var(--gold);"></i>
+          </button>
+
+          <div id="collectionsMenu" class="dropdown-menu absolute left-1/2 -translate-x-1/2 mt-3 w-56 glass-card rounded-2xl shadow-xl">
+            <a href="#rings" class="block px-4 py-3 hover:bg-[rgba(201,169,97,0.08)] rounded-t-2xl">
+              <span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]">
+                <i class="fa-solid fa-ring" style="color: var(--gold);"></i>
+                RINGS
+              </span>
+            </a>
+            <a href="#earrings" class="block px-4 py-3 hover:bg-[rgba(201,169,97,0.08)]">
+              <span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]">
+                <i class="fa-solid fa-ear-listen" style="color: var(--gold);"></i>
+                EARRINGS
+              </span>
+            </a>
+            <a href="#necklaces" class="block px-4 py-3 hover:bg-[rgba(201,169,97,0.08)]">
+              <span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]">
+                <i class="fa-solid fa-link" style="color: var(--gold);"></i>
+                NECKLACES
+              </span>
+            </a>
+            <a href="#pendants" class="block px-4 py-3 hover:bg-[rgba(201,169,97,0.08)]">
+              <span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]">
+                <i class="fa-solid fa-gem" style="color: var(--gold);"></i>
+                PENDANTS
+              </span>
+            </a>
+            <a href="#bracelets" class="block px-4 py-3 hover:bg-[rgba(201,169,97,0.08)]">
+              <span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]">
+                <i class="fa-solid fa-circle-notch" style="color: var(--gold);"></i>
+                BRACELETS
+              </span>
+            </a>
+            <a href="#bangles" class="block px-4 py-3 hover:bg-[rgba(201,169,97,0.08)] rounded-b-2xl">
+              <span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]">
+                <i class="fa-solid fa-circle" style="color: var(--gold);"></i>
+                BANGLES
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <a href="#styling" class="text-[13px] uppercase tracking-[0.18em] font-semibold hover:text-[var(--gold)]">STYLING GUIDE</a>
+        <a href="#contact" class="text-[13px] uppercase tracking-[0.18em] font-semibold hover:text-[var(--gold)]">CONTACT</a>
+      </div>
+
+      <!-- Mobile Menu (simple) -->
+      <button id="mobileMenuBtn" class="md:hidden menu-btn rounded-xl p-2" aria-label="Open menu">
+        <i class="fa-solid fa-bars" style="color: var(--gold);"></i>
+      </button>
+    </nav>
+
+    <div id="mobileMenu" class="md:hidden hidden px-4 pb-4">
+      <div class="glass-card rounded-3xl p-4">
+        <a href="#home" class="block py-2 font-semibold uppercase tracking-[0.14em] text-[13px] hover:text-[var(--gold)]">HOME</a>
+        <div class="mt-2">
+          <button id="mobileCollectionsBtn" class="w-full flex items-center justify-between py-2 font-semibold uppercase tracking-[0.14em] text-[13px] hover:text-[var(--gold)]">
+            <span>COLLECTIONS</span>
+            <i class="fa-solid fa-chevron-down" style="color: var(--gold);"></i>
+          </button>
+          <div id="mobileCollectionsMenu" class="hidden mt-2">
+            <a href="#rings" class="flex items-center gap-3 py-2 font-semibold uppercase tracking-[0.12em] text-[13px] hover:text-[var(--gold)]"><i class="fa-solid fa-ring" style="color: var(--gold);"></i>RINGS</a>
+            <a href="#earrings" class="flex items-center gap-3 py-2 font-semibold uppercase tracking-[0.12em] text-[13px] hover:text-[var(--gold)]"><i class="fa-solid fa-ear-listen" style="color: var(--gold);"></i>EARRINGS</a>
+            <a href="#necklaces" class="flex items-center gap-3 py-2 font-semibold uppercase tracking-[0.12em] text-[13px] hover:text-[var(--gold)]"><i class="fa-solid fa-link" style="color: var(--gold);"></i>NECKLACES</a>
+            <a href="#pendants" class="flex items-center gap-3 py-2 font-semibold uppercase tracking-[0.12em] text-[13px] hover:text-[var(--gold)]"><i class="fa-solid fa-gem" style="color: var(--gold);"></i>PENDANTS</a>
+            <a href="#bracelets" class="flex items-center gap-3 py-2 font-semibold uppercase tracking-[0.12em] text-[13px] hover:text-[var(--gold)]"><i class="fa-solid fa-circle-notch" style="color: var(--gold);"></i>BRACELETS</a>
+            <a href="#bangles" class="flex items-center gap-3 py-2 font-semibold uppercase tracking-[0.12em] text-[13px] hover:text-[var(--gold)]"><i class="fa-solid fa-circle" style="color: var(--gold);"></i>BANGLES</a>
+          </div>
+        </div>
+        <a href="#styling" class="block py-2 mt-2 font-semibold uppercase tracking-[0.14em] text-[13px] hover:text-[var(--gold)]">STYLING GUIDE</a>
+        <a href="#contact" class="block py-2 font-semibold uppercase tracking-[0.14em] text-[13px] hover:text-[var(--gold)]">CONTACT</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO — Split Layout: Text Left | Ring Video Right -->
+  <style>
+    .hero-split { display:grid; grid-template-columns:1fr 1fr; min-height:100vh; background:#0a0a0a; }
+    @media(max-width:768px){ .hero-split{ grid-template-columns:1fr; } .hero-right-panel{ min-height:55vh; } }
+
+    /* Left panel */
+    .hero-left-panel {
+      display:flex; flex-direction:column; justify-content:center;
+      padding:6rem 5% 5rem 7%;
+      background:#0a0a0a;
+      position:relative; overflow:hidden;
+    }
+    .hero-left-panel::before {
+      content:''; position:absolute; top:-120px; left:-120px;
+      width:400px; height:400px;
+      background:radial-gradient(circle, rgba(201,169,97,0.12) 0%, transparent 70%);
+      border-radius:50%; pointer-events:none;
+    }
+
+    /* Ticker / looping text */
+    .hero-ticker-wrap {
+      overflow:hidden; white-space:nowrap;
+      border-top:1px solid rgba(201,169,97,0.25);
+      border-bottom:1px solid rgba(201,169,97,0.25);
+      padding:0.55rem 0; margin-bottom:2.4rem;
+    }
+    .hero-ticker-track {
+      display:inline-block;
+      animation: tickerScroll 18s linear infinite;
+    }
+    .hero-ticker-line {
+      display:inline-block;
+      font-size:0.72rem; font-weight:700; letter-spacing:0.25em;
+      text-transform:uppercase; color:var(--gold);
+      padding-right:4rem;
+    }
+    @keyframes tickerScroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .hero-eyebrow {
+      font-size:0.7rem; letter-spacing:0.35em; text-transform:uppercase;
+      color:rgba(201,169,97,0.75); margin-bottom:1.1rem; font-weight:600;
+    }
+    .hero-h1 {
+      font-family:'Playfair Display',serif;
+      font-size:clamp(2.8rem,5.5vw,5.2rem);
+      font-weight:700; line-height:1.06;
+      color:#ffffff; letter-spacing:2px;
+      margin-bottom:1.4rem;
+    }
+    .hero-h1 span { color:var(--gold); }
+    .hero-sub {
+      font-size:1.05rem; color:rgba(255,255,255,0.65);
+      line-height:1.75; max-width:420px; margin-bottom:2.4rem; font-weight:300;
+    }
+    .hero-btns { display:flex; flex-wrap:wrap; gap:1rem; }
+    .hero-btn-primary {
+      padding:0.9rem 2.2rem; background:var(--gold); color:#0a0a0a;
+      font-weight:700; font-size:0.82rem; letter-spacing:0.18em;
+      text-transform:uppercase; border-radius:50px; text-decoration:none;
+      transition:all 0.3s; box-shadow:0 8px 28px rgba(201,169,97,0.35);
+    }
+    .hero-btn-primary:hover { background:#e0be78; box-shadow:0 12px 36px rgba(201,169,97,0.5); transform:translateY(-2px); }
+    .hero-btn-outline {
+      padding:0.9rem 2.2rem; border:2px solid rgba(255,255,255,0.35); color:#fff;
+      font-weight:600; font-size:0.82rem; letter-spacing:0.18em;
+      text-transform:uppercase; border-radius:50px; text-decoration:none;
+      backdrop-filter:blur(8px); background:rgba(255,255,255,0.06); transition:all 0.3s;
+    }
+    .hero-btn-outline:hover { background:rgba(255,255,255,0.14); border-color:rgba(255,255,255,0.6); transform:translateY(-2px); }
+
+    /* Right panel — video */
+    .hero-right-panel {
+      position:relative; background:#000;
+      display:flex; align-items:center; justify-content:center; overflow:hidden;
+    }
+    .hero-right-panel video {
+      width:100%; height:100%; object-fit:cover; display:block;
+    }
+    /* Subtle gold border on left edge of right panel */
+    .hero-right-panel::before {
+      content:''; position:absolute; left:0; top:10%; bottom:10%;
+      width:2px; background:linear-gradient(to bottom, transparent, var(--gold), transparent);
+      z-index:2;
+    }
+  </style>
+
+  <section id="home" class="hero-split">
+    <!-- LEFT: Branding + Ticker + CTAs -->
+    <div class="hero-left-panel" data-aos="fade-right">
+      <!-- 2-line looping ticker -->
+      <div class="hero-ticker-wrap">
+        <span class="hero-ticker-track">
+          <span class="hero-ticker-line">✦ Luxury Gold Jewelry</span>
+          <span class="hero-ticker-line">✦ Premium Collections</span>
+          <span class="hero-ticker-line">✦ Handcrafted Elegance</span>
+          <span class="hero-ticker-line">✦ Pakistan's Finest</span>
+          <span class="hero-ticker-line">✦ Luxury Gold Jewelry</span>
+          <span class="hero-ticker-line">✦ Premium Collections</span>
+          <span class="hero-ticker-line">✦ Handcrafted Elegance</span>
+          <span class="hero-ticker-line">✦ Pakistan's Finest</span>
+        </span>
+      </div>
+      <div class="hero-ticker-wrap" style="margin-bottom:2.6rem;">
+        <span class="hero-ticker-track" style="animation-direction:reverse; animation-duration:14s;">
+          <span class="hero-ticker-line" style="color:rgba(255,255,255,0.45);">◆ Rings &amp; Bands</span>
+          <span class="hero-ticker-line" style="color:rgba(255,255,255,0.45);">◆ Necklaces &amp; Pendants</span>
+          <span class="hero-ticker-line" style="color:rgba(255,255,255,0.45);">◆ Earrings &amp; Bangles</span>
+          <span class="hero-ticker-line" style="color:rgba(255,255,255,0.45);">◆ Bracelets &amp; More</span>
+          <span class="hero-ticker-line" style="color:rgba(255,255,255,0.45);">◆ Rings &amp; Bands</span>
+          <span class="hero-ticker-line" style="color:rgba(255,255,255,0.45);">◆ Necklaces &amp; Pendants</span>
+          <span class="hero-ticker-line" style="color:rgba(255,255,255,0.45);">◆ Earrings &amp; Bangles</span>
+          <span class="hero-ticker-line" style="color:rgba(255,255,255,0.45);">◆ Bracelets &amp; More</span>
+        </span>
+      </div>
+
+      <p class="hero-eyebrow">Pakistan's Premium Jewelry House</p>
+      <h1 class="hero-h1">AUREL<br><span>JEWELS</span></h1>
+      <p class="hero-sub">Luminous gold-toned jewelry crafted to catch light, elevate every occasion, and feel effortless on skin.</p>
+      <div class="hero-btns">
+        <a href="#rings" class="hero-btn-primary">Explore Collections</a>
+        <a href="#contact" class="hero-btn-outline">Get Consultation</a>
+      </div>
+    </div>
+
+    <!-- RIGHT: Ring video playing -->
+    <div class="hero-right-panel" data-aos="fade-left">
+      <video autoplay loop muted playsinline>
+        <source src="WhatsApp Video 2026-06-14 at 1.51.38 AM.mp4" type="video/mp4">
+      </video>
+    </div>
+  </section>
+
+  <!-- STYLING GUIDE (compact) -->
+  <section id="styling" class="py-12 sm:py-16" style="background-image: url('updated store/images/WhatsApp Image 2026-06-09 at 11.37.41 AM.jpeg');">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center" data-aos="fade-up">
+        <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full glass-card">
+          <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--gold);"></i>
+          <p class="uppercase tracking-[0.22em] text-sm font-semibold">STYLING GUIDE</p>
+        </div>
+        <h2 class="mt-5 text-3xl sm:text-4xl" style="font-family:'Playfair Display',serif; font-weight:600;">Layer • Balance • Shine</h2>
+        <p class="mt-3 mx-auto max-w-2xl text-[#1a1a1a]/70">Start with a statement piece, add a complementary set, then finish with one gold-toned accent for a cohesive glow.</p>
+      </div>
+
+      <div class="mt-10 grid md:grid-cols-3 gap-5">
+        <div class="glass-card rounded-3xl p-6" data-aos="fade-up" data-aos-delay="50">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-gem" style="color: var(--gold);"></i>
+            <h3 class="font-semibold uppercase tracking-widest text-sm">Choose One Hero</h3>
+          </div>
+          <p class="mt-3 text-[#1a1a1a]/70">Let rings or necklaces lead the look. Keep everything else clean and elegant.</p>
+        </div>
+        <div class="glass-card rounded-3xl p-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-circle-notch" style="color: var(--gold);"></i>
+            <h3 class="font-semibold uppercase tracking-widest text-sm">Balance Metals</h3>
+          </div>
+          <p class="mt-3 text-[#1a1a1a]/70">Pair warm gold accents with cool shimmer tones to keep your style dimensional.</p>
+        </div>
+        <div class="glass-card rounded-3xl p-6" data-aos="fade-up" data-aos-delay="150">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-link" style="color: var(--gold);"></i>
+            <h3 class="font-semibold uppercase tracking-widest text-sm">Finish with Texture</h3>
+          </div>
+          <p class="mt-3 text-[#1a1a1a]/70">Add a bracelet or bangles only when you want that extra light-catch moment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLLECTION SECTIONS (6) -->
+  <section id="rings" class="fixed-model-bg section-pad-top py-12 sm:py-16" style="background-image:url('updated store/images/WhatsApp Image 2026-06-14 at 1.10.28 AM (1).jpeg'); background-attachment:fixed;">
+    <div class="fixed-model-overlay" aria-hidden="true"></div>
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-center" data-aos="fade-up">
+        <div class="glass-card rounded-full px-5 py-3 flex items-center gap-3">
+          <i class="fa-solid fa-ring" style="color: var(--gold);"></i>
+          <h2 class="uppercase tracking-[0.22em] font-semibold text-sm">RINGS</h2>
+        </div>
+      </div>
+      <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 6 product cards -->
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up">
+          <img src="images/model wearing rings.jpeg" alt="Ring" class="h-56 w-full object-cover" />
+          <div class="p-5">
+            <p class="font-semibold" style="font-family:'Playfair Display',serif;">Auric Solitaire Ring</p>
+            <p class="mt-2 text-sm text-[#1a1a1a]/70">Diamond Solitaire Ring</p>
+            <div class="mt-4 flex items-center justify-between">
+              <span class="font-bold text-[#C9A961]">Rs. 29,900</span>
+              <span class="text-xs uppercase tracking-widest font-semibold">View</span>
+            </div>
+          </div>
+        </div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="70">
+          <img src="images/models wearing rings (2).jpeg" alt="Ring" class="h-56 w-full object-cover" />
+          <div class="p-5">
+            <p class="font-semibold" style="font-family:'Playfair Display',serif;">Celeste Halo Ring</p>
+            <p class="mt-2 text-sm text-[#1a1a1a]/70">Halo shimmer finish</p>
+            <div class="mt-4 flex items-center justify-between">
+              <span class="font-bold text-[#C9A961]">Rs. 24,500</span>
+              <span class="text-xs uppercase tracking-widest font-semibold">View</span>
+            </div>
+          </div>
+        </div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="120">
+          <img src="images/models wearing rings (3).jpeg" alt="Ring" class="h-56 w-full object-cover" />
+          <div class="p-5">
+            <p class="font-semibold" style="font-family:'Playfair Display',serif;">Pearl Crown Band</p>
+            <p class="mt-2 text-sm text-[#1a1a1a]/70">Soft luminous texture</p>
+            <div class="mt-4 flex items-center justify-between">
+              <span class="font-bold text-[#C9A961]">Rs. 18,900</span>
+              <span class="text-xs uppercase tracking-widest font-semibold">View</span>
+            </div>
+          </div>
+        </div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up">
+          <img src="images/models wearing rings (4).jpeg" alt="Ring" class="h-56 w-full object-cover" />
+          <div class="p-5">
+            <p class="font-semibold" style="font-family:'Playfair Display',serif;">Royal Arc Ring</p>
+            <p class="mt-2 text-sm text-[#1a1a1a]/70">Sculpted gold arc</p>
+            <div class="mt-4 flex items-center justify-between">
+              <span class="font-bold text-[#C9A961]">Rs. 21,700</span>
+              <span class="text-xs uppercase tracking-widest font-semibold">View</span>
+            </div>
+          </div>
+        </div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="70">
+          <img src="images/models wearing rings (5).jpeg" alt="Ring" class="h-56 w-full object-cover" />
+          <div class="p-5">
+            <p class="font-semibold" style="font-family:'Playfair Display',serif;">Diamond Twist Ring</p>
+            <p class="mt-2 text-sm text-[#1a1a1a]/70">Twisted light-catcher</p>
+            <div class="mt-4 flex items-center justify-between">
+              <span class="font-bold text-[#C9A961]">Rs. 33,200</span>
+              <span class="text-xs uppercase tracking-widest font-semibold">View</span>
+            </div>
+          </div>
+        </div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="120">
+          <img src="images/model wearing rings.jpeg" alt="Ring" class="h-56 w-full object-cover" />
+          <div class="p-5">
+            <p class="font-semibold" style="font-family:'Playfair Display',serif;">Opal Glow Ring</p>
+            <p class="mt-2 text-sm text-[#1a1a1a]/70">Opalescent crystal aura</p>
+            <div class="mt-4 flex items-center justify-between">
+              <span class="font-bold text-[#C9A961]">Rs. 27,800</span>
+              <span class="text-xs uppercase tracking-widest font-semibold">View</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="earrings" class="fixed-model-bg section-pad-top py-12 sm:py-16" style="background-image:url(\'updated store/images/WhatsApp Image 2026-06-14 at 1.10.29 AM (1).jpeg\'); background-attachment:fixed;">
+    <div class="fixed-model-overlay" aria-hidden="true"></div>
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-center" data-aos="fade-up">
+        <div class="glass-card rounded-full px-5 py-3 flex items-center gap-3">
+          <i class="fa-solid fa-ear-listen" style="color: var(--gold);"></i>
+          <h2 class="uppercase tracking-[0.22em] font-semibold text-sm">EARRINGS</h2>
+        </div>
+      </div>
+      <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up"><img src="images/models wearing earrings.jpeg" alt="Earrings" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Auric Drop Earrings</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Feathered shimmer swing</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 14,900</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="70"><img src="images/models wearing earings.jpeg" alt="Earrings" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Celeste Studs</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Tiny brilliance dailywear</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 9,800</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="120"><img src="images/model wearing earrings.jpeg" alt="Earrings" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Diamond Halo Hoops</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Bright hoop framing</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 18,400</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up"><img src="images/model wearing earrings (2).jpeg" alt="Earrings" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Pearl Quartz Drops</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Soft pearl + crystal duo</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 16,900</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="70"><img src="images/model wearing earrings (3).jpeg" alt="Earrings" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Opal Glint Earrings</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Iridescent sparkle motion</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 17,600</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="120"><img src="images/model wearing earrings (4).jpeg" alt="Earrings" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Royal Fringe Drops</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Fringe detail brilliance</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 20,250</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="necklaces" class="fixed-model-bg section-pad-top py-12 sm:py-16" style="background-image:url(\'updated store/images/WhatsApp Image 2026-06-14 at 1.10.30 AM.jpeg\'); background-attachment:fixed;">
+    <div class="fixed-model-overlay" aria-hidden="true"></div>
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-center" data-aos="fade-up">
+        <div class="glass-card rounded-full px-5 py-3 flex items-center gap-3">
+          <i class="fa-solid fa-link" style="color: var(--gold);"></i>
+          <h2 class="uppercase tracking-[0.22em] font-semibold text-sm">NECKLACES</h2>
+        </div>
+      </div>
+      <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up"><img src="images/models wearing necklaces.jpeg" alt="Necklace" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Auric Chain Necklace</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Fine chain luminous finish</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 21,500</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="70"><img src="images/models wearing necklaces (2).jpeg" alt="Necklace" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Celeste Pendant</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Halo pendant centerpiece</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 25,000</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="120"><img src="images/models wearing necklaces (3).jpeg" alt="Necklace" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Pearl Cascade</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Pearl-glow layered look</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 17,200</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up"><img src="images/models wearing necklaces (4).jpeg" alt="Necklace" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Royal Link Collar</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Modern collar statement</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 28,750</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="70"><img src="images/models wearing necklaces (5).jpeg" alt="Necklace" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Opal Aura Chain</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Opal glint curve design</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 23,900</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="120"><img src="images/models wearing necklaces (6).jpeg" alt="Necklace" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Diamond Vine Necklace</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Vine-motif scintillation</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 30,250</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pendants" class="fixed-model-bg section-pad-top py-12 sm:py-16" style="background-image:url(\'updated store/images/WhatsApp Image 2026-06-14 at 1.10.27 AM (1).jpeg\'); background-attachment:fixed;">
+    <div class="fixed-model-overlay" aria-hidden="true"></div>
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-center" data-aos="fade-up">
+        <div class="glass-card rounded-full px-5 py-3 flex items-center gap-3">
+          <i class="fa-solid fa-gem" style="color: var(--gold);"></i>
+          <h2 class="uppercase tracking-[0.22em] font-semibold text-sm">PENDANTS</h2>
+        </div>
+      </div>
+      <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up"><img src="images/models wearing pendant.jpeg" alt="Pendant" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Starlight Pendant</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Sparkle star centerpiece</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 24,200</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="70"><img src="images/models wearing pendant (2).jpeg" alt="Pendant" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Sapphire Glow Pendant</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Royal blue scintillation</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 31,900</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="120"><img src="images/models wearing pendant (3).jpeg" alt="Pendant" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Auric Gem Drop</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Gem drop brilliance</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 19,500</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up"><img src="images/models wearing pendant (4).jpeg" alt="Pendant" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Opal Crown Pendant</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Crown-cut iridescence</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 26,750</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="70"><img src="images/models wearing pendant (5).jpeg" alt="Pendant" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Pearl Halo Pendant</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Pearl halo framing</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 18,950</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="120"><img src="images/models wearing pendant (6).jpeg" alt="Pendant" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Diamond Vine Pendant</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Vine sparkle geometry</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 29,100</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="bracelets" class="fixed-model-bg section-pad-top py-12 sm:py-16" style="background-image:url(\'updated store/images/WhatsApp Image 2026-06-14 at 1.10.28 AM (2).jpeg\'); background-attachment:fixed;">
+    <div class="fixed-model-overlay" aria-hidden="true"></div>
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-center" data-aos="fade-up">
+        <div class="glass-card rounded-full px-5 py-3 flex items-center gap-3">
+          <i class="fa-solid fa-circle-notch" style="color: var(--gold);"></i>
+          <h2 class="uppercase tracking-[0.22em] font-semibold text-sm">BRACELETS</h2>
+        </div>
+      </div>
+      <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up"><img src="images/models wearing bracelets.jpeg" alt="Bracelet" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Tennis Bracelet</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Line sparkle brilliance</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 32,000</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="70"><img src="images/models wearing bracelets (2).jpeg" alt="Bracelet" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Auric Link Cuff</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Structured gold link</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 27,450</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="120"><img src="images/models wearing bracelets (3).jpeg" alt="Bracelet" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Opal Gleam Bracelet</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Iridescent crystal glow</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 24,950</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up"><img src="images/models wearing bracelets (4).jpeg" alt="Bracelet" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Pearl Knot Bracelet</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Pearl knot motif</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 19,250</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="70"><img src="images/models wearing bracelets (5).jpeg" alt="Bracelet" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Royal Chain Bracelet</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Smooth royal chain finish</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 21,800</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="120"><img src="images/models wearing bracelets (6).jpeg" alt="Bracelet" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Diamond Arc Cuff</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Arc-shaped sparkle design</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 29,600</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="bangles" class="fixed-model-bg section-pad-top py-12 sm:py-16" style="background-image:url(\'updated store/images/WhatsApp Image 2026-06-14 at 1.10.31 AM (1).jpeg\'); background-attachment:fixed;">
+    <div class="fixed-model-overlay" aria-hidden="true"></div>
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-center" data-aos="fade-up">
+        <div class="glass-card rounded-full px-5 py-3 flex items-center gap-3">
+          <i class="fa-solid fa-circle" style="color: var(--gold);"></i>
+          <h2 class="uppercase tracking-[0.22em] font-semibold text-sm">BANGLES</h2>
+        </div>
+      </div>
+      <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up"><img src="images/models wearing bangles.jpeg" alt="Bangles" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Royal Kada Set</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Classic kada brilliance</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 28,500</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="70"><img src="images/models wearing bangles (2).jpeg" alt="Bangles" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Floral Gold Bangles</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Floral etched glow</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 22,900</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="120"><img src="images/models wearing bangles (3).jpeg" alt="Bangles" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Celestial Zircon Kada</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Zircon sparkle finish</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 34,000</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up"><img src="images/models wearing bangles (4).jpeg" alt="Bangles" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Mehndi Antique Bangles</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Antique gold motif</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 22,000</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="70"><img src="images/models wearing bangles (5).jpeg" alt="Bangles" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Rose Blush Kada</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Rose-tone festive charm</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 19,400</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+        <div class="glass-card collection-card rounded-3xl overflow-hidden" data-aos="fade-up" data-aos-delay="120"><img src="images/models wearing bangles (6).jpeg" alt="Bangles" class="h-56 w-full object-cover"/><div class="p-5"><p class="font-semibold" style="font-family:'Playfair Display',serif;">Pearl Halo Bangles</p><p class="mt-2 text-sm text-[#1a1a1a]/70">Pearl glow for celebrations</p><div class="mt-4 flex items-center justify-between"><span class="font-bold text-[#C9A961]">Rs. 27,250</span><span class="text-xs uppercase tracking-widest font-semibold">View</span></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT CARD (Exact layout & fields) -->
+  <section id="contact" class="py-12 sm:py-16" style="background-image: url('updated store/images/WhatsApp Image 2026-06-09 at 11.41.59 AM copy.jpeg');">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center" data-aos="fade-up">
+        <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full glass-card">
+          <i class="fa-solid fa-headset" style="color: var(--gold);"></i>
+          <p class="uppercase tracking-[0.22em] text-sm font-semibold">CONTACT</p>
+        </div>
+        <h2 class="mt-5 text-3xl sm:text-4xl" style="font-family:'Playfair Display',serif; font-weight:600;">Customer Support & Inquiry</h2>
+        <p class="mt-3 mx-auto max-w-2xl text-[#1a1a1a]/70">WhatsApp for quick help, or send a detailed inquiry using the form.</p>
+      </div>
+
+      <div class="mt-10 grid lg:grid-cols-2 gap-6">
+        <!-- Left Card -->
+        <div class="glass-card rounded-3xl p-6 sm:p-8" data-aos="fade-up">
+          <div class="space-y-6">
+            <div class="p-5 rounded-2xl bg-white/60 border border-[#C9A961]/25">
+              <div class="flex items-center gap-4">
+                <i class="fa-brands fa-whatsapp" style="font-size:1.6rem; color: var(--gold);"></i>
+                <div>
+                  <h3 class="font-semibold" style="font-family:'Playfair Display',serif;">WhatsApp Chat Support</h3>
+                  <p class="mt-1 text-sm text-[#1a1a1a]/70">0329 6430927</p>
+                </div>
+              </div>
+              <div class="mt-4">
+                <a href="https://wa.me/923296430927" target="_blank" rel="noreferrer" class="inline-flex items-center justify-center w-full px-5 py-3 rounded-xl bg-[#C9A961] text-[#1a1a1a] font-semibold uppercase tracking-widest text-sm hover:brightness-110 transition">
+                  OPEN WHATSAPP
+                </a>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-white/60 border border-[#C9A961]/25">
+              <div class="flex items-center gap-4">
+                <i class="fa-solid fa-envelope" style="font-size:1.6rem; color: var(--gold);"></i>
+                <div>
+                  <h3 class="font-semibold" style="font-family:'Playfair Display',serif;">Email Consultation</h3>
+                  <p class="mt-1 text-sm text-[#1a1a1a]/70">ayazmehmod05@gmail.com</p>
+                </div>
+              </div>
+              <div class="mt-4">
+                <a href="mailto:ayazmehmod05@gmail.com" class="inline-flex items-center justify-center w-full px-5 py-3 rounded-xl bg-[#C9A961] text-[#1a1a1a] font-semibold uppercase tracking-widest text-sm hover:brightness-110 transition">
+                  EMAIL US
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Card -->
+        <div class="glass-card rounded-3xl p-6 sm:p-8" data-aos="fade-up" data-aos-delay="100">
+          <h3 class="text-xl sm:text-2xl font-semibold" style="font-family:'Playfair Display',serif;">Customer Inquiry Form</h3>
+          <p class="mt-2 text-sm text-[#1a1a1a]/70">Share your details so we can respond with the best options.</p>
+
+          <form class="mt-6" onsubmit="return false;">
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="text-xs uppercase tracking-widest font-semibold">Full Name</label>
+                <input class="mt-2 w-full bg-white border border-gray-300 rounded-lg px-3 py-2" type="text" placeholder="Full Name" required />
+              </div>
+              <div>
+                <label class="text-xs uppercase tracking-widest font-semibold">Email Address</label>
+                <input class="mt-2 w-full bg-white border border-gray-300 rounded-lg px-3 py-2" type="email" placeholder="Email Address" required />
+              </div>
+              <div>
+                <label class="text-xs uppercase tracking-widest font-semibold">Phone Number</label>
+                <input class="mt-2 w-full bg-white border border-gray-300 rounded-lg px-3 py-2" type="tel" placeholder="Phone Number" required />
+              </div>
+              <div>
+                <label class="text-xs uppercase tracking-widest font-semibold">Delivery Address</label>
+                <input class="mt-2 w-full bg-white border border-gray-300 rounded-lg px-3 py-2" type="text" placeholder="Delivery Address" required />
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <label class="text-xs uppercase tracking-widest font-semibold">Your Message</label>
+              <textarea class="mt-2 w-full bg-white border border-gray-300 rounded-lg px-3 py-2 min-h-[120px]" placeholder="Your Message" required></textarea>
+            </div>
+
+            <div class="mt-5">
+              <button type="submit" class="w-full px-5 py-3 rounded-xl bg-[#C9A961] text-[#1a1a1a] font-semibold uppercase tracking-widest text-sm hover:brightness-110 transition">Send Inquiry</button>
+            </div>
+
+            <p class="mt-3 text-xs text-[#1a1a1a]/60">This demo form does not submit automatically.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AOS + Dropdown + Typewriter are below -->
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+AOS.init({once:false, mirror:true});
+
+    // Collections dropdown (desktop)
+    const collectionsBtn = document.getElementById('collectionsBtn');
+    const collectionsMenu = document.getElementById('collectionsMenu');
+    function closeCollectionsDesktop(){
+      if(!collectionsMenu) return;
+      collectionsMenu.style.opacity = '0';
+      collectionsMenu.style.pointerEvents = 'none';
+    }
+    function openCollectionsDesktop(){
+      if(!collectionsMenu) return;
+      collectionsMenu.style.opacity = '1';
+      collectionsMenu.style.pointerEvents = 'auto';
+    }
+    if(collectionsBtn && collectionsMenu){
+      collectionsMenu.style.opacity='0';
+      collectionsMenu.style.pointerEvents='none';
+      collectionsBtn.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        const isOpen = collectionsBtn.getAttribute('aria-expanded') === 'true';
+        collectionsBtn.setAttribute('aria-expanded', String(!isOpen));
+        if(isOpen){
+          closeCollectionsDesktop();
+        } else {
+          openCollectionsDesktop();
+        }
+      });
+      document.addEventListener('click', ()=>{
+        collectionsBtn.setAttribute('aria-expanded','false');
+        closeCollectionsDesktop();
+      });
+    }
+
+    // Mobile menu
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileCollectionsBtn = document.getElementById('mobileCollectionsBtn');
+    const mobileCollectionsMenu = document.getElementById('mobileCollectionsMenu');
+
+    if(mobileMenuBtn && mobileMenu){
+      mobileMenuBtn.addEventListener('click', ()=>{
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+
+    if(mobileCollectionsBtn && mobileCollectionsMenu){
+      mobileCollectionsBtn.addEventListener('click', ()=>{
+        mobileCollectionsMenu.classList.toggle('hidden');
+      });
+    }
+  </script>
+
+  <!-- TYPEWRITER JS (exactly as provided) -->
+  <script>
+    const phrases = ["Timeless Elegance", "Modern Pakistani Bride", "Handcrafted Jewelry", "TCS Delivery"];
+    let phraseIndex=0,charIndex=0,isDeleting=false;const typingElement=document.getElementById('rotate-text');function typeWriterCycle(){const c=phrases[phraseIndex];if(isDeleting){typingElement.textContent=c.substring(0,charIndex-1);charIndex--}else{typingElement.textContent=c.substring(0,charIndex+1);charIndex++}let d=isDeleting?40:80;if(!isDeleting&&charIndex===c.length){d=2500;isDeleting=true}else if(isDeleting&&charIndex===0){isDeleting=false;phraseIndex=(phraseIndex+1)%phrases.length;d=600}setTimeout(typeWriterCycle,d)}document.addEventListener('DOMContentLoaded',typeWriterCycle);
+  </script>
+</body>
+</html>
+

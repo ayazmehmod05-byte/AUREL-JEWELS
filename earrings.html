@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Earrings — AUREL JEWELS Jewelry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── CSS Variables ─────────────────────────────────────── */
+    :root {
+      --gold:       #D4AF37;
+      --gold-light: #e8cc6a;
+      --gold-dark:  #a88a1e;
+      --dark:       #0f0f11;
+      --dark-2:     #16161a;
+      --white:      #ffffff;
+      --cream:      #FAF7F2;
+      --gray:       #7a7a85;
+      --light-gray: #f3f3f5;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans:  'Outfit', sans-serif;
+      --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      --shadow-gold: 0 8px 40px rgba(212, 175, 55, 0.18);
+      --radius: 14px;
+    }
+
+    /* ─── Reset & Base ──────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--dark);
+      color: var(--white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── Scrollbar ─────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--dark); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 3px; }
+
+    /* ══════════════════════════════════════════════════════════
+       NAVBAR
+    ══════════════════════════════════════════════════════════ */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 0 48px;
+      height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      transition: background var(--transition), box-shadow var(--transition), backdrop-filter var(--transition);
+    }
+
+    .navbar.scrolled {
+      background: rgba(15, 15, 17, 0.96);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 2px 32px rgba(0, 0, 0, 0.55);
+    }
+
+    /* Logo */
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--white);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .nav-logo span { color: var(--gold); }
+
+    /* Nav Links */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: nowrap;
+    }
+
+    .nav-links > li { position: relative; }
+
+    .nav-links > li > a,
+    .nav-links > li > button {
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.78);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px 11px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color var(--transition), background var(--transition);
+      white-space: nowrap;
+    }
+
+    .nav-links > li > a:hover,
+    .nav-links > li > button:hover,
+    .nav-links > li > a.active {
+      color: var(--gold);
+      background: rgba(212, 175, 55, 0.08);
+    }
+
+    /* Dropdown toggle chevron */
+    .dropdown-chevron {
+      width: 14px; height: 14px;
+      transition: transform var(--transition);
+      opacity: 0.7;
+    }
+    .has-dropdown.open .dropdown-chevron { transform: rotate(180deg); }
+
+    /* Dropdown Panel */
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%) translateY(-8px);
+      background: #1a1a20;
+      border: 1px solid rgba(212, 175, 55, 0.18);
+      border-radius: var(--radius);
+      padding: 10px 8px;
+      min-width: 210px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(212,175,55,0.06);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      z-index: 100;
+    }
+    .has-dropdown.open .dropdown-menu {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .dropdown-menu a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.82);
+      transition: background var(--transition), color var(--transition);
+    }
+    .dropdown-menu a:hover { background: rgba(212,175,55,0.1); color: var(--gold); }
+    .dropdown-menu a.active-page { color: var(--gold); background: rgba(212,175,55,0.08); }
+
+    .dropdown-menu .emoji { font-size: 1rem; }
+
+    .dropdown-divider {
+      height: 1px;
+      background: rgba(212,175,55,0.12);
+      margin: 6px 10px;
+    }
+
+    /* CTA Button */
+    .nav-cta {
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--dark) !important;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light)) !important;
+      border: none;
+      border-radius: 50px;
+      padding: 9px 20px !important;
+      cursor: pointer;
+      transition: opacity var(--transition), box-shadow var(--transition), transform var(--transition) !important;
+      white-space: nowrap;
+      flex-shrink: 0;
+      box-shadow: 0 4px 18px rgba(212,175,55,0.25);
+    }
+    .nav-cta:hover {
+      opacity: 0.9 !important;
+      box-shadow: 0 6px 26px rgba(212,175,55,0.38) !important;
+      transform: translateY(-1px) !important;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light)) !important;
+      color: var(--dark) !important;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       CATEGORY HERO
+    ══════════════════════════════════════════════════════════ */
+    .category-hero {
+      height: 380px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: radial-gradient(circle at 40% 50%, #1a1014 0%, #0f0f11 100%);
+      position: relative;
+      overflow: hidden;
+      margin-top: 74px; /* navbar height */
+    }
+
+    /* subtle decorative ring */
+    .category-hero::before {
+      content: '';
+      position: absolute;
+      width: 520px; height: 520px;
+      border-radius: 50%;
+      border: 1px solid rgba(212, 175, 55, 0.08);
+      top: 50%; left: 42%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .category-hero::after {
+      content: '';
+      position: absolute;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      border: 1px solid rgba(212, 175, 55, 0.06);
+      top: 50%; left: 42%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    /* gold accent bar */
+    .hero-accent {
+      width: 52px; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      border-radius: 2px;
+      margin: 0 auto 22px;
+    }
+
+    .hero-breadcrumb {
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 18px;
+    }
+    .hero-breadcrumb a { color: var(--gray); transition: color var(--transition); }
+    .hero-breadcrumb a:hover { color: var(--gold); }
+    .hero-breadcrumb span { color: var(--gold); margin: 0 7px; }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: 4rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.02em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-subtitle {
+      font-size: 1.02rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.6);
+      max-width: 520px;
+      line-height: 1.65;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       PRODUCT GRID SECTION
+    ══════════════════════════════════════════════════════════ */
+    .products-section {
+      padding: 80px 48px 100px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 1.85rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .section-count {
+      font-size: 0.85rem;
+      color: var(--gray);
+      font-weight: 400;
+    }
+
+    /* ─── Product Grid ──────────────────────────────────────── */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    /* ─── Product Card ──────────────────────────────────────── */
+    .product-card {
+      background: #16161a;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      position: relative;
+      opacity: 0;
+      transform: translateY(28px);
+    }
+
+    .product-card.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .product-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5), var(--shadow-gold);
+      border-color: rgba(212, 175, 55, 0.28);
+    }
+
+    /* Image Placeholder */
+    .card-image {
+      height: 280px;
+      background: linear-gradient(145deg, #1e1e24, #13131a);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 60%, rgba(212,175,55,0.05) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .card-image-icon {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      border: 1.5px dashed rgba(212,175,55,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(212,175,55,0.4);
+      font-size: 1.4rem;
+      font-weight: 300;
+      transition: border-color var(--transition), color var(--transition);
+    }
+
+    .product-card:hover .card-image-icon {
+      border-color: rgba(212,175,55,0.65);
+      color: rgba(212,175,55,0.75);
+    }
+
+    .card-image-label {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.22);
+      text-transform: uppercase;
+    }
+
+    /* Badge */
+    .card-badge {
+      position: absolute;
+      top: 14px; left: 14px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(212, 175, 55, 0.12);
+      border: 1px solid rgba(212, 175, 55, 0.22);
+      padding: 4px 10px;
+      border-radius: 50px;
+    }
+
+    /* Quick View */
+    .card-quick-view {
+      position: absolute;
+      bottom: 14px; left: 50%;
+      transform: translateX(-50%) translateY(8px);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--dark);
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border: none;
+      border-radius: 50px;
+      padding: 8px 22px;
+      cursor: pointer;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity var(--transition), transform var(--transition);
+      box-shadow: 0 4px 16px rgba(212,175,55,0.3);
+    }
+
+    .product-card:hover .card-quick-view {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Card Body */
+    .card-body {
+      padding: 20px 20px 22px;
+    }
+
+    .card-name {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+
+    .card-name-placeholder {
+      height: 16px;
+      width: 72%;
+      background: rgba(255,255,255,0.06);
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+    .card-price {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+    }
+
+    .card-price-sub {
+      font-size: 0.73rem;
+      color: var(--gray);
+      font-weight: 300;
+      margin-top: 4px;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════════════════════ */
+    .footer {
+      background: #0a0a0c;
+      border-top: 1px solid rgba(212, 175, 55, 0.1);
+      padding: 72px 48px 36px;
+    }
+
+    .footer-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 56px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* Brand column */
+    .footer-brand-logo {
+      font-family: var(--font-serif);
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.06em;
+      margin-bottom: 16px;
+    }
+    .footer-brand-logo span { color: var(--gold); }
+
+    .footer-tagline {
+      font-size: 0.88rem;
+      color: var(--gray);
+      line-height: 1.7;
+      max-width: 300px;
+      margin-bottom: 28px;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 12px;
+    }
+
+    .social-link {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      border: 1px solid rgba(212,175,55,0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: var(--gray);
+      transition: border-color var(--transition), color var(--transition), background var(--transition);
+    }
+
+    .social-link:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(212,175,55,0.08);
+    }
+
+    /* Footer columns */
+    .footer-col-title {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .footer-col ul {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col ul li a {
+      font-size: 0.88rem;
+      color: var(--gray);
+      transition: color var(--transition);
+    }
+    .footer-col ul li a:hover { color: var(--white); }
+
+    /* Footer bottom */
+    .footer-bottom {
+      max-width: 1280px;
+      margin: 32px auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(122, 122, 133, 0.6);
+    }
+
+    .footer-copy span { color: var(--gold); }
+
+    .footer-legal {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-legal a {
+      font-size: 0.78rem;
+      color: rgba(122,122,133,0.6);
+      transition: color var(--transition);
+    }
+    .footer-legal a:hover { color: var(--gray); }
+
+    /* ══════════════════════════════════════════════════════════
+       SCROLL REVEAL ANIMATION
+    ══════════════════════════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════════════════════ */
+    @media (max-width: 1100px) {
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { gap: 2px; }
+      .nav-links > li > a,
+      .nav-links > li > button { font-size: 0.77rem; padding: 7px 8px; }
+    }
+
+    @media (max-width: 860px) {
+      .navbar { padding: 0 24px; }
+      .nav-links { display: none; }
+      .products-section { padding: 60px 24px 80px; }
+      .hero-title { font-size: 2.8rem; }
+      .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+      .footer { padding: 56px 24px 32px; }
+    }
+
+    @media (max-width: 580px) {
+      .product-grid { grid-template-columns: 1fr; }
+      .hero-title { font-size: 2.2rem; }
+    }
+  </style>
+  <style>
+    /* Task 5: THEME - Glass Effect for cards */
+    .product-card, .category-card, .contact-card, .engraving-preview-card, .metric-content-box, .collection-card, .item-card, .finish-selection-box {
+      background: rgba(255, 255, 255, 0.6) !important;
+      backdrop-filter: blur(10px) !important;
+      -webkit-backdrop-filter: blur(10px) !important;
+      border: 1px solid rgba(255,255,255,0.4) !important;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07) !important;
+    }
+    
+    /* Ensure text is visible and layout correct */
+    .smart-showcase h2, .smart-showcase p, .smart-showcase h3, .smart-showcase li, .smart-showcase span {
+      color: #1a1a1a !important;
+    }
+  </style>
+    <style>
+      /* Section Backgrounds Overlay */
+      body {
+         background-color: #FFFFFF !important;
+         color: #1a1a1a !important;
+      }
+      section, header, footer, main {
+          position: relative;
+          background-attachment: fixed !important;
+          background-size: cover !important;
+          background-position: center !important;
+      }
+      section::before, header::before, footer::before, main::before {
+          content: "";
+          position: absolute;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background: rgba(255, 255, 255, 0.42) !important;
+          z-index: 0;
+          pointer-events: none;
+      }
+      section > *, header > *, footer > *, main > * {
+          position: relative;
+          z-index: 1;
+      }
+      
+      /* All cards glass effect */
+      .product-card, .category-card, .contact-card, .engraving-preview-card, .metric-content-box, .collection-card, .item-card, .finish-selection-box {
+          background: rgba(255, 255, 255, 0.6) !important;
+          backdrop-filter: blur(10px) !important;
+          -webkit-backdrop-filter: blur(10px) !important;
+          border: 1px solid rgba(255,255,255,0.4) !important;
+          box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07) !important;
+      }
+      
+      
+      /* Text Colors override for white theme */
+      body, p, span, div, a, li { color: #1a1a1a; }
+      h1, h2, h3, h4, h5, h6, .sec-title h2, .hero h1, .smart-showcase h2, .logo { color: #1a1a1a !important; }
+      .category-overlay h3, .product-info-box h3 { color: #1a1a1a !important; }
+      .dropdown-item { color: #1a1a1a !important; }
+      .nav-links a { color: #1a1a1a !important; }
+
+      h1, h2, h3, h4, h5, h6, p, span, li, a {
+          color: #1a1a1a;
+      }
+      .sec-title h2, .hero h1, .smart-showcase h2, .logo {
+          color: #1a1a1a !important;
+      }
+    </style>
+
+    <style id="site-spacing-theme">
+      /* Transparent glass overlay — model backgrounds stay visible */
+      section::before, header::before, footer::before, main::before {
+        background: rgba(255, 255, 255, 0.42) !important;
+      }
+      .fixed-model-overlay {
+        background: rgba(255, 255, 255, 0.42) !important;
+      }
+      /* Reduced spacing sitewide */
+      .collection-section, .shop-section, .contact-section,
+      .smart-showcase, .about-section, .bespoke-cta,
+      .engraving-section, .stacking-section, .categories-section {
+        padding: 3.5rem 6% !important;
+      }
+      .contact-section { padding: 3.5rem 6% !important; }
+      .sec-title, .section-header { margin-bottom: 2rem !important; }
+      .category-hero { height: 300px !important; min-height: 300px !important; }
+      .page-hero { padding: 5rem 5% 3rem !important; }
+      .section-pad-top { padding-top: 4.5rem !important; }
+      .features-strip, .promo-strip, .category-strip { margin: 0 !important; }
+      /* Rings-matched product grid for pendants / bracelets / bangles */
+      .product-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 2.5rem !important;
+        max-width: none !important;
+        margin: 0 !important;
+      }
+      .product-img-box {
+        height: 280px !important;
+        aspect-ratio: unset !important;
+      }
+      .product-img-box img {
+        width: 100% !important;
+        height: 300px !important;
+        object-fit: cover !important;
+        border-radius: 12px !important;
+        display: block !important;
+      }
+      .card-image { height: 280px !important; }
+      .card-image img {
+        width: 100% !important;
+        height: 300px !important;
+        object-fit: cover !important;
+      }
+    </style>
+
+
+    <style id="collection-contact-css">
+      .sec-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .sec-title span {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: #D4AF37;
+        font-weight: 600;
+        display: block;
+        margin-bottom: 0.6rem;
+      }
+      .sec-title h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .sec-title p {
+        color: #7a7a85;
+        margin-top: 0.75rem;
+        font-size: 0.95rem;
+      }
+
+      .contact-section { padding: 3.5rem 6%; background: transparent; }
+      .contact-grid {
+        display: grid;
+        grid-template-columns: minmax(280px, 0.9fr) minmax(320px, 1.1fr);
+        gap: 2.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        align-items: stretch;
+      }
+      .contact-card {
+        background: rgba(255,255,255,0.55);
+        padding: 2rem;
+        border-radius: 16px;
+        border: 1px solid rgba(201,169,97,0.4);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        display: flex;
+        flex-direction: column;
+        gap: 1.4rem;
+      }
+      .contact-method {
+        display: grid;
+        grid-template-columns: 56px 1fr;
+        gap: 1rem;
+        align-items: start;
+        padding-bottom: 1.4rem;
+        border-bottom: 1px solid rgba(201,169,97,0.25);
+      }
+      .contact-method:last-child { border-bottom: 0; padding-bottom: 0; }
+      .contact-icon {
+        width: 56px; height: 56px; border-radius: 50%;
+        display: grid; place-items: center;
+        background: rgba(255,255,255,0.72);
+        border: 1px solid rgba(201,169,97,0.4);
+      }
+      .contact-icon img { width: 30px; height: 30px; object-fit: contain; }
+      .contact-card h3 { font-family: 'Playfair Display', serif; font-size: 1.35rem; margin-bottom: 0.5rem; }
+      .contact-card p { font-size: 0.9rem; color: #7a7a85; margin-bottom: 0.75rem; }
+      .contact-number { font-weight: 700; margin-bottom: 0.75rem; }
+      .contact-card-btn {
+        display: inline-flex; align-items: center; justify-content: center;
+        padding: 0.7rem 1.2rem; background: #0f0f11; color: #fff;
+        border-radius: 4px; font-weight: 600; font-size: 0.8rem;
+        letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
+        transition: background 0.3s;
+      }
+      .contact-card-btn:hover { background: #D4AF37; color: #0f0f11; }
+      .contact-form-card {
+        background: rgba(255,255,255,0.55);
+        padding: 2rem; border-radius: 16px;
+        border: 1px solid rgba(201,169,97,0.4);
+        backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      }
+      .contact-form-card h3 { font-family: 'Playfair Display', serif; font-size: 1.45rem; margin-bottom: 1rem; }
+      .contact-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+      .contact-form-card .form-group { margin-bottom: 1rem; }
+      .contact-form-card .form-group.full { grid-column: 1 / -1; }
+      .contact-form-card label {
+        display: block; font-size: 0.75rem; font-weight: 600;
+        letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.4rem;
+      }
+      .contact-form-card input, .contact-form-card textarea {
+        width: 100%; padding: 0.75rem 1rem;
+        border: 1px solid rgba(201,169,97,0.35);
+        border-radius: 8px; background: rgba(255,255,255,0.8);
+        font-family: inherit; font-size: 0.9rem;
+      }
+      .btn-gold-fill, .contact-submit-btn {
+        padding: 0.85rem 2rem; background: #D4AF37; color: #0f0f11;
+        border: 1px solid #D4AF37; border-radius: 4px;
+        font-weight: 700; font-size: 0.85rem; letter-spacing: 1.5px;
+        text-transform: uppercase; cursor: pointer; transition: all 0.3s;
+      }
+      .btn-gold-fill:hover, .contact-submit-btn:hover {
+        background: #e8cb6a; transform: translateY(-2px);
+      }
+      @media (max-width: 900px) {
+        .contact-grid { grid-template-columns: 1fr; }
+        .contact-form-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <!-- Logo -->
+    <a href="store.html" class="nav-logo">AUREL <span>JEWELS</span></a>
+
+    <!-- Nav Links -->
+    <ul class="nav-links" id="navLinks">
+      <li><a href="store.html">Home</a></li>
+      <li><a href="store.html#smart-ring">Smart Wearables</a></li>
+      <li><a href="store.html#shop">Curations</a></li>
+
+      <!-- Collections Dropdown -->
+      <li class="has-dropdown" id="collectionsDropdown">
+        <button id="collectionsBtn" aria-haspopup="true" aria-expanded="false">
+          Collections
+          <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="dropdown-menu" id="collectionsMenu" role="menu">
+          <a href="rings.html" role="menuitem"><span class="emoji">💍</span> Rings</a>
+          <a href="earrings.html" class="active-page" role="menuitem"><span class="emoji">👂</span> Earrings</a>
+          <a href="necklaces.html" role="menuitem"><span class="emoji">📿</span> Necklaces</a>
+          <a href="pendants.html" role="menuitem"><span class="emoji">💎</span> Pendants</a>
+          <div class="dropdown-divider"></div>
+          <a href="bracelets.html" role="menuitem"><span class="emoji">✨</span> Bracelets</a>
+          <a href="bangles.html" role="menuitem"><span class="emoji">🔮</span> Bangles</a>
+        </div>
+      </li>
+
+      <li><a href="store.html#stack-builder">Styling Guide</a></li>
+      <li><a href="store.html#about">Our Brand</a></li>
+      <li><a href="store.html#contact">Contact</a></li>
+    </ul>
+
+    <!-- CTA -->
+    <a href="mailto:hello@AUREL JEWELSjewelry.com" class="nav-cta">Custom Inquiry</a>
+  </nav>
+
+
+  <!-- ═══════════════════════════════════════════════════
+       CATEGORY HERO
+  ═══════════════════════════════════════════════════ -->
+  <section class="category-hero" style="background-image: url('updated store/images/WhatsApp Image 2026-06-14 at 1.10.24 AM (1).jpeg');">
+    <div class="hero-breadcrumb">
+      <a href="store.html">Home</a>
+      <span>/</span>
+      <a href="store.html#shop">Collections</a>
+      <span>/</span>
+      Earrings
+    </div>
+    <div class="hero-accent"></div>
+    <h1 class="hero-title">Earrings</h1>
+    <p class="hero-subtitle">
+      From delicate studs to dramatic drops — explore earrings crafted for every occasion.
+    </p>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════
+       PRODUCT GRID
+  ═══════════════════════════════════════════════════ -->
+  <section class="products-section" style="background-image: url('updated store/images/WhatsApp Image 2026-06-14 at 1.10.24 AM (2).jpeg');">
+
+    <div class="section-header reveal">
+      <div>
+        <p class="section-label">Collection</p>
+        <h2 class="section-title">Our Earrings</h2>
+      </div>
+      <p class="section-count">6 styles available</p>
+    </div>
+
+    <div class="product-grid" id="productGrid">
+
+      <!-- Card 1 -->
+      <div class="product-card">
+        <div class="card-image">
+          <img src="images/models wearing earrings.jpeg" alt="Product Name" style="width:100%;height:300px;object-fit:cover;border-radius:12px;">
+        </div>
+        <div class="card-body">
+          <div class="card-name-placeholder"></div>
+          <p class="card-price">Rs. —,———</p>
+          <p class="card-price-sub">Free shipping on orders above Rs. 2,000</p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="product-card">
+        <div class="card-image">
+          <img src="images/models wearing earings.jpeg" alt="Product Name" style="width:100%;height:300px;object-fit:cover;border-radius:12px;">
+        </div>
+        <div class="card-body">
+          <div class="card-name-placeholder"></div>
+          <p class="card-price">Rs. —,———</p>
+          <p class="card-price-sub">Free shipping on orders above Rs. 2,000</p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="product-card">
+        <div class="card-image">
+          <img src="images/model wearing earrings.jpeg" alt="Product Name" style="width:100%;height:300px;object-fit:cover;border-radius:12px;">
+        </div>
+        <div class="card-body">
+          <div class="card-name-placeholder"></div>
+          <p class="card-price">Rs. —,———</p>
+          <p class="card-price-sub">Free shipping on orders above Rs. 2,000</p>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="product-card">
+        <div class="card-image">
+          <img src="images/model wearing earrings (2).jpeg" alt="Product Name" style="width:100%;height:300px;object-fit:cover;border-radius:12px;">
+        </div>
+        <div class="card-body">
+          <div class="card-name-placeholder"></div>
+          <p class="card-price">Rs. —,———</p>
+          <p class="card-price-sub">Free shipping on orders above Rs. 2,000</p>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="product-card">
+        <div class="card-image">
+          <img src="images/model wearing earrings (3).jpeg" alt="Product Name" style="width:100%;height:300px;object-fit:cover;border-radius:12px;">
+        </div>
+        <div class="card-body">
+          <div class="card-name-placeholder"></div>
+          <p class="card-price">Rs. —,———</p>
+          <p class="card-price-sub">Free shipping on orders above Rs. 2,000</p>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="product-card">
+        <div class="card-image">
+          <img src="images/model wearing earrings (4).jpeg" alt="Product Name" style="width:100%;height:300px;object-fit:cover;border-radius:12px;">
+        </div>
+        <div class="card-body">
+          <div class="card-name-placeholder"></div>
+          <p class="card-price">Rs. —,———</p>
+          <p class="card-price-sub">Free shipping on orders above Rs. 2,000</p>
+        </div>
+      </div>
+
+    </div><!-- /product-grid -->
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════════ -->
+  
+<!-- CONTACT SECTION -->
+<section class="contact-section reveal" id="contact" style="background-image: url('updated store/images/WhatsApp Image 2026-06-14 at 1.10.31 AM (1).jpeg');">
+  <div class="sec-title reveal">
+    <span>Direct Assistance</span>
+    <h2>We're One Message Away</h2>
+    <p>Quick questions on sizes, product quality, or order tracking? Contact us instantly.</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-card reveal">
+      <div class="contact-method">
+        <div class="contact-icon"><img src="images/png whatsapp logo.png" alt="WhatsApp"></div>
+        <div>
+          <h3>WhatsApp Chat Support</h3>
+          <p>Quick sizing help, order updates, and product questions.</p>
+          <div class="contact-number">0329 6430927</div>
+          <a href="https://wa.me/923296430927" target="_blank" class="contact-card-btn">Open WhatsApp</a>
+        </div>
+      </div>
+      <div class="contact-method">
+        <div class="contact-icon"><img src="images/gmail png logo.png" alt="Email"></div>
+        <div>
+          <h3>Email Consultation</h3>
+          <p>Custom orders, wholesale requests, and detailed inquiries.</p>
+          <div class="contact-number">ayazmehmod05@gmail.com</div>
+          <a href="mailto:ayazmehmod05@gmail.com" class="contact-card-btn">Send Email</a>
+        </div>
+      </div>
+    </div>
+    <form class="contact-form-card reveal" onsubmit="handleContactSubmit(event)">
+      <h3>Send Your Details</h3>
+      <div class="contact-form-grid">
+        <div class="form-group">
+          <label for="contact-full-name">Full Name</label>
+          <input type="text" id="contact-full-name" name="full-name" required>
+        </div>
+        <div class="form-group">
+          <label for="contact-email">Email Address</label>
+          <input type="email" id="contact-email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="contact-phone">Phone Number</label>
+          <input type="tel" id="contact-phone" name="phone" required>
+        </div>
+        <div class="form-group">
+          <label for="contact-address">Delivery Address</label>
+          <input type="text" id="contact-address" name="delivery-address" required>
+        </div>
+        <div class="form-group full">
+          <label for="contact-message">Your Message</label>
+          <textarea id="contact-message" name="message" rows="5" required></textarea>
+        </div>
+      </div>
+      <button type="submit" class="contact-submit-btn">Submit Message</button>
+    </form>
+  </div>
+</section>
+
+<footer class="footer" style="background-image: url('updated store/images/WhatsApp Image 2026-06-14 at 1.10.24 AM.jpeg');">
+    <div class="footer-grid">
+
+      <!-- Brand Column -->
+      <div class="footer-brand">
+        <div class="footer-brand-logo">AUREL <span>JEWELS</span></div>
+        <p class="footer-tagline">
+          Luxury jewelry where artistry meets technology. Each piece is crafted for those who refuse to be ordinary.
+        </p>
+        <div class="footer-socials">
+          <a href="#" class="social-link" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Pinterest">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.65 7.86 6.39 9.29-.09-.78-.17-1.98.03-2.83.19-.77 1.27-5.38 1.27-5.38s-.32-.65-.32-1.6c0-1.5.87-2.62 1.96-2.62.92 0 1.37.69 1.37 1.53 0 .93-.59 2.33-.9 3.62-.26 1.08.54 1.96 1.6 1.96 1.92 0 3.2-2.47 3.2-5.39 0-2.22-1.49-3.88-4.19-3.88-3.06 0-4.96 2.29-4.96 4.85 0 .88.26 1.5.67 1.98.19.23.21.32.14.58-.05.19-.16.65-.2.83-.07.27-.28.37-.52.27-1.44-.59-2.11-2.18-2.11-3.96 0-2.93 2.48-6.47 7.39-6.47 3.96 0 6.57 2.88 6.57 5.97 0 4.1-2.27 7.18-5.6 7.18-1.12 0-2.18-.6-2.54-1.28l-.7 2.72c-.25.97-.94 2.19-1.41 2.93.94.27 1.93.41 2.95.41 5.52 0 10-4.48 10-10S17.52 2 12 2z"/>
+            </svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Collections Column -->
+      <div class="footer-col">
+        <p class="footer-col-title">Collections</p>
+        <ul>
+          <li><a href="rings.html">💍 Rings</a></li>
+          <li><a href="earrings.html">👂 Earrings</a></li>
+          <li><a href="necklaces.html">📿 Necklaces</a></li>
+          <li><a href="pendants.html">💎 Pendants</a></li>
+          <li><a href="bracelets.html">✨ Bracelets</a></li>
+          <li><a href="bangles.html">🔮 Bangles</a></li>
+        </ul>
+      </div>
+
+      <!-- Company Column -->
+      <div class="footer-col">
+        <p class="footer-col-title">Company</p>
+        <ul>
+          <li><a href="store.html#about">Our Brand</a></li>
+          <li><a href="store.html#stack-builder">Styling Guide</a></li>
+          <li><a href="store.html#smart-ring">Smart Wearables</a></li>
+          <li><a href="store.html#contact">Contact Us</a></li>
+          <li><a href="mailto:hello@AUREL JEWELSjewelry.com">Custom Inquiry</a></li>
+        </ul>
+      </div>
+
+    </div><!-- /footer-grid -->
+
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 <span>AUREL JEWELS</span> Jewelry. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Shipping & Returns</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ═══════════════════════════════════════════════════
+       JAVASCRIPT
+  ═══════════════════════════════════════════════════ -->
+  <script>
+    // ── Sticky / scrolled navbar ──────────────────────────────
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // ── Collections dropdown toggle ───────────────────────────
+    const dropdownEl  = document.getElementById('collectionsDropdown');
+    const dropdownBtn = document.getElementById('collectionsBtn');
+    const dropdownMenu = document.getElementById('collectionsMenu');
+
+    dropdownBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = dropdownEl.classList.toggle('open');
+      dropdownBtn.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Close when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!dropdownEl.contains(e.target)) {
+        dropdownEl.classList.remove('open');
+        dropdownBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        dropdownEl.classList.remove('open');
+        dropdownBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // ── Product card scroll reveal ────────────────────────────
+    const cards = document.querySelectorAll('.product-card');
+
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          // Stagger by index
+          const idx = Array.from(cards).indexOf(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('revealed');
+          }, idx * 90);
+          cardObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    cards.forEach(card => cardObserver.observe(card));
+
+    // ── Generic scroll reveal ─────────────────────────────────
+    const revealEls = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // ── Quick View buttons ────────────────────────────────────
+    document.querySelectorAll('.card-quick-view').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        alert('Quick View coming soon — product details will appear here.');
+      });
+    });
+  </script>
+
+<script>
+function handleContactSubmit(e) {
+  e.preventDefault();
+  const name = document.getElementById('contact-full-name').value.trim();
+  alert('Thank you, ' + name + '! Your message has been received. We will contact you shortly.');
+  e.target.reset();
+}
+</script>
+</body>
+</html>
