@@ -2875,7 +2875,29 @@ document.addEventListener('click', (e) => {
         easing: 'ease-in-out'
       });
     </script>
-
+<style>
+@media (max-width: 768px) {
+    .hero-left {
+        flex: 0 0 100% !important;
+        text-align: center !important;
+        padding: 0 20px !important;
+    }
+    .hero-left h1 {
+        letter-spacing: 1px !important;
+        font-size: clamp(1.6rem, 9vw, 2.5rem) !important;
+    }
+    .nav-links {
+        display: none !important;
+    }
+    .hero {
+        padding-top: 120px !important;
+    }
+    .hero-left .tagline {
+        letter-spacing: 2px !important;
+        font-size: 0.9rem !important;
+    }
+}
+</style>
   </body>
 </html>
 
