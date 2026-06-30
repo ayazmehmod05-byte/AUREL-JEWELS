@@ -4,8 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bangles — AUREL JEWELS Luxury Jewelry</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap');
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
 
 :root {
   --gold: #D4AF37;
@@ -1248,6 +1250,108 @@ footer {
         .contact-grid { grid-template-columns: 1fr; }
         .contact-form-grid { grid-template-columns: 1fr; }
       }
+      /* === AUREL JEWELS MINT THEME - COMPLETE CODE === */
+
+/* 1. Page Background Mint */
+html, body {
+    background: #10b981 !important;
+    background-image: 
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(110, 231, 183, 0.2) 0%, transparent 50%) !important;
+    min-height: 100vh !important;
+    color: #ffffff !important;
+}
+
+/* 2. Navbar Mint Glass */
+header, nav, .navbar {
+    background: rgba(4, 120, 87, 0.4) !important;
+    backdrop-filter: blur(20px) !important;
+    border-bottom: 1.5px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+nav a, .logo, .navbar-brand {
+    color: #ffffff !important;
+}
+
+/* 3. Cards White Karo */
+html body .product-card,
+html body .card,
+html body div[class*="card"],
+html body .grid-item {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    background-image: none !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.6) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+    overflow: hidden !important;
+}
+
+/* 4. Cards Ka Text Dark Mint */
+.product-card h2, .product-card h3, .product-card h4,
+.product-card p, .card h2, .card h3, .card p,
+.product-title, .product-desc {
+    color: #064e3b !important;
+}
+
+/* 5. Price Golden Karo */
+.price, [class*="price"] {
+    color: #d4af37 !important;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+}
+
+/* 6. BANGLES Label Golden */
+small, .category-label, .tag {
+    color: #d4af37 !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    font-size: 11px !important;
+    letter-spacing: 1px !important;
+}
+
+/* 7. QUICK VIEW Button Dark Mint */
+html body button,
+html body .btn,
+html body .quick-view,
+html body a[class*="btn"],
+html body a[class*="button"],
+html body div[role="button"] {
+    background: linear-gradient(135deg, #047857 0%, #065f46 100%) !important;
+    background-color: #047857 !important;
+    color: #ffffff !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.7) !important;
+    border-radius: 12px !important;
+    padding: 12px 24px !important;
+    text-align: center !important;
+    display: block !important;
+    width: 100% !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+}
+
+/* 8. Button Hover */
+html body button:hover,
+html body .btn:hover,
+html body .quick-view:hover {
+    background: linear-gradient(135deg, #065f46 0%, #064e3b 100%) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(4, 120, 87, 0.4) !important;
+}
+
+/* 9. Heading White */
+h1, h2, .main-title, .page-title {
+    color: #ffffff !important;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+}
+
+/* 10. Sab Sections Transparent */
+section, main, .container, .wrapper {
+    background: transparent !important;
+}
     </style>
 
 </head>
@@ -1262,31 +1366,29 @@ footer {
     <li><a href="store.html#shop">Curations</a></li>
     <!-- COLLECTIONS DROPDOWN -->
     <li class="nav-dropdown" id="collections-dropdown">
-      <button class="nav-dropdown-trigger" onclick="toggleDropdown()" aria-expanded="false">
+      <button class="nav-dropdown-trigger" id="collectionsBtn" aria-expanded="false" aria-haspopup="true">
         Collections
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="6 9 12 15 18 9"></polyline>
-        </svg>
+        <i class="fa-solid fa-chevron-down" style="color: var(--gold);"></i>
       </button>
-            <div class="nav-dropdown-menu" id="collections-menu">
-        <a href="rings.html" class="dropdown-item">
-          <i class="fa-solid fa-ring"></i> Rings
+      <div class="nav-dropdown-menu" id="collectionsMenu" role="menu">
+        <a href="rings.html" class="dropdown-item" role="menuitem">
+          <span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]"><i class="fa-solid fa-ring" style="color: var(--gold);"></i> RINGS</span>
         </a>
-        <a href="earrings.html" class="dropdown-item">
-          <i class="fa-solid fa-ear-listen"></i> Earrings
+        <a href="earrings.html" class="dropdown-item" role="menuitem">
+          <span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]"><i class="fa-solid fa-ear-listen" style="color: var(--gold);"></i> EARRINGS</span>
         </a>
-        <a href="necklaces.html" class="dropdown-item">
-          <i class="fa-solid fa-link"></i> Necklaces
+        <a href="necklaces.html" class="dropdown-item" role="menuitem">
+          <span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]"><i class="fa-solid fa-link" style="color: var(--gold);"></i> NECKLACES</span>
         </a>
-        <a href="pendants.html" class="dropdown-item">
-          <i class="fa-solid fa-gem"></i> Pendants
+        <a href="pendants.html" class="dropdown-item" role="menuitem">
+          <span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]"><i class="fa-solid fa-gem" style="color: var(--gold);"></i> PENDANTS</span>
         </a>
         <div class="dropdown-divider"></div>
-        <a href="bracelets.html" class="dropdown-item">
-          <i class="fa-solid fa-circle-notch"></i> Bracelets
+        <a href="bracelets.html" class="dropdown-item" role="menuitem">
+          <span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]"><i class="fa-solid fa-circle-notch" style="color: var(--gold);"></i> BRACELETS</span>
         </a>
-        <a href="bangles.html" class="dropdown-item">
-          <i class="fa-solid fa-circle"></i> Bangles
+        <a href="bangles.html" class="dropdown-item active-page" role="menuitem">
+          <span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]"><i class="fa-solid fa-circle" style="color: var(--gold);"></i> BANGLES</span>
         </a>
       </div>
     </li>
@@ -1671,22 +1773,40 @@ function handleBookingSubmit(event) {
   document.getElementById('booking-form').reset();
 }
 
-// ── Collections dropdown (click / mobile support)
-function toggleDropdown() {
-  const dropdown = document.getElementById('collections-dropdown');
-  const trigger  = dropdown.querySelector('.nav-dropdown-trigger');
-  const isOpen   = dropdown.classList.contains('open');
-  dropdown.classList.toggle('open');
-  trigger.setAttribute('aria-expanded', !isOpen);
+// ── Collections dropdown toggle ──────────────────────────────
+const dropdownEl  = document.getElementById('collections-dropdown');
+const dropdownBtn = document.getElementById('collectionsBtn');
+const dropdownMenu = document.getElementById('collectionsMenu');
+
+function openDropdown() {
+  dropdownMenu.classList.add('open');
+  dropdownBtn.classList.add('open');
+  dropdownBtn.setAttribute('aria-expanded', 'true');
 }
 
-document.addEventListener('click', (e) => {
-  const dropdown = document.getElementById('collections-dropdown');
-  if (dropdown && !dropdown.contains(e.target)) {
-    dropdown.classList.remove('open');
-    const trigger = dropdown.querySelector('.nav-dropdown-trigger');
-    if (trigger) trigger.setAttribute('aria-expanded', 'false');
+function closeDropdown() {
+  dropdownMenu.classList.remove('open');
+  dropdownBtn.classList.remove('open');
+  dropdownBtn.setAttribute('aria-expanded', 'false');
+}
+
+dropdownBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  if (dropdownMenu.classList.contains('open')) {
+    closeDropdown();
+  } else {
+    openDropdown();
   }
+});
+
+document.addEventListener('click', (e) => {
+  if (!dropdownBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+    closeDropdown();
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeDropdown();
 });
 
 // ── Close modals on Escape key

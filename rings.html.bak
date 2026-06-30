@@ -1050,16 +1050,17 @@ nav a, .logo, .nav-link {
       <!-- Collections Dropdown -->
       <li>
         <button class="nav-btn-plain" id="collectionsBtn" aria-expanded="false" aria-haspopup="true">
-          Collections <i class="fa-solid fa-chevron-down" style="color: var(--gold);"></i>
+          Collections <span class="chevron">▾</span>
         </button>
         <div class="dropdown-menu" id="collectionsMenu" role="menu">
-          <a href="rings.html" class="active" role="menuitem"><span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]"><i class="fa-solid fa-ring" style="color: var(--gold);"></i> RINGS</span></a>
-          <a href="earrings.html" role="menuitem"><span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]"><i class="fa-solid fa-ear-listen" style="color: var(--gold);"></i> EARRINGS</span></a>
-          <a href="necklaces.html" role="menuitem"><span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]"><i class="fa-solid fa-link" style="color: var(--gold);"></i> NECKLACES</span></a>
-          <a href="pendants.html" role="menuitem"><span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]"><i class="fa-solid fa-gem" style="color: var(--gold);"></i> PENDANTS</span></a>
+          <a href="rings.html" class="active" role="menuitem"> Rings</a>
+          <i class="fa-solid fa-ring"></i>
+          <a href="earrings.html" role="menuitem"><span class="emoji"></span> Earrings</a>
+          <a href="necklaces.html" role="menuitem"><span class="emoji"></span> Necklaces</a>
+          <a href="pendants.html" role="menuitem"><span class="emoji"></span> Pendants</a>
           <div class="dropdown-divider"></div>
-          <a href="bracelets.html" role="menuitem"><span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]"><i class="fa-solid fa-circle-notch" style="color: var(--gold);"></i> BRACELETS</span></a>
-          <a href="bangles.html" role="menuitem"><span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]"><i class="fa-solid fa-circle" style="color: var(--gold);"></i> BANGLES</span></a>
+          <a href="bracelets.html" role="menuitem"><span class="emoji"></span> Bracelets</a>
+          <a href="bangles.html" role="menuitem"><span class="emoji"></span> Bangles</a>
         </div>
       </li>
 
@@ -1161,6 +1162,9 @@ nav a, .logo, .nav-link {
         <button class="quick-add-btn" onclick="alert('Added to cart!')">QUICK VIEW</button>
     </div>
 </div>
+          <button class="card-btn">Quick View</button>
+        </div>
+      </div>
 
     <!-- Card 4 - Line 1050 se 1065 tak replace karo -->
 <div class="product-card">
@@ -1200,6 +1204,7 @@ nav a, .logo, .nav-link {
         <button class="quick-add-btn" onclick="alert('Added to cart!')">QUICK VIEW</button>
     </div>
 </div>
+
     </div><!-- /product-grid -->
   </section>
 

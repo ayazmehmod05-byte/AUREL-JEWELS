@@ -2005,25 +2005,41 @@ footer {
     }
   </style>
     <style>
-      /* Section Backgrounds Overlay */
-      body {
-         background-color: #FFFFFF !important;
-         color: #1a1a1a !important;
-      }
-      section, header, footer, main {
-          position: relative;
-          background-attachment: fixed !important;
-          background-size: cover !important;
-          background-position: center !important;
-      }
-      section::before, header::before, footer::before, main::before {
-          content: "";
-          position: absolute;
-          top: 0; left: 0; right: 0; bottom: 0;
-          background: rgba(255, 255, 255, 0.42) !important;
-          z-index: 0;
-          pointer-events: none;
-      }
+     <style>
+/* === FINAL MINT THEME - Czn Wala Look === */
+html, body {
+    background: #10b981 !important;
+    background-color: #10b981 !important;
+    color: #ffffff !important;
+    min-height: 100% !important;
+    margin: 0 !important;
+}
+
+body {
+    background-image: 
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(110, 231, 183, 0.2) 0%, transparent 50%) !important;
+}
+
+/* Sab sections transparent karo */
+section, header, footer, main, div {
+    background: transparent !important;
+}
+
+/* Text white karo */
+h1, h2, h3, h4, h5, h6, p, span, a, li, .smart-showcase h2, .smart-showcase p {
+    color: #ffffff !important;
+}
+
+/* Cards white glass */
+.product-card, .category-card, .contact-card, .preview-box {
+    background: rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.4) !important;
+    border-radius: 24px !important;
+}
+</style>
       section > *, header > *, footer > *, main > * {
           position: relative;
           z-index: 1;
@@ -2098,6 +2114,106 @@ footer {
         height: 300px !important;
         object-fit: cover !important;
       }
+      /* === MINT + CRYSTAL GLASS THEME === */
+:root {
+    --mint: #10b981;
+    --mint-light: #6ee7b7; 
+    --mint-dark: #047857;
+    --glass: rgba(255, 255, 255, 0.2);
+    --glass-border: rgba(255, 255, 255, 0.3);
+}
+
+body {
+    background: #10b981 !important; /* Full Sea Green */
+    background-image: 
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(110, 231, 183, 0.2) 0%, transparent 50%) !important;
+    color: #ffffff !important;
+}
+/* iOS Crystal Glass Cards */
+.product-card, .category-card, .card {
+    background: var(--glass) !important;
+    backdrop-filter: blur(16px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 8px 32px rgba(16, 185, 129, 0.1) !important;
+    transition: all 0.3s ease !important;
+}
+
+.product-card:hover, .category-card:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 16px 48px rgba(16, 185, 129, 0.2) !important;
+    border: 1px solid var(--mint) !important;
+}
+
+/* iOS Crystal Glass Buttons */
+button, .btn, .add-to-cart {
+    background: var(--glass) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 14px !important;
+    padding: 12px 24px !important;
+    color: var(--mint-dark) !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.15) !important;
+}
+
+button:hover, .btn:hover, .add-to-cart:hover {
+    background: rgba(16, 185, 129, 0.15) !important;
+    border: 1px solid var(--mint) !important;
+    transform: scale(1.05) !important;
+}
+
+/* Header/Navbar Glass */
+header, .navbar {
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(20px) !important;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.1) !important;
+}
+/* === OVERRIDE: FORCE MINT + REMOVE WHITE === */
+html {
+    background: #10b981 !important;
+    background-color: #10b981 !important;
+    height: 100% !important;
+}
+
+body {
+    background: #10b981 !important;
+    background-color: #10b981 !important;
+    background-image: 
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(110, 231, 183, 0.2) 0%, transparent 50%) !important;
+    color: #ffffff !important;
+    min-height: 100vh !important;
+}
+
+/* First Page Ke White Sections Ko Khatam Karo */
+.hero, .main-banner, .banner, section:first-of-type,
+.hero::before, .main-banner::before, section::before {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+}
+
+/* Navbar Mint Glass Karo - White Hatao */
+header, .navbar, nav {
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Text White Karo */
+h1, h2, h3, p, span, a, .logo, .nav-links a {
+    color: #ffffff !important;
+}
+
+.logo span {
+    color: #f0fdf4 !important;
+}
     </style>
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>

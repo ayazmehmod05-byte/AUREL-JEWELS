@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
   <style>
     /* ── CSS Variables ─────────────────────────────────────── */
     :root {
@@ -970,19 +971,18 @@
 
       <!-- Collections dropdown -->
       <li>
-        <a href="#" class="active">
-          Collections
-          <i class="chevron"></i>
-        </a>
-        <ul class="dropdown">
-          <li><a href="rings.html"><span class="emoji">💍</span> Rings</a></li>
-          <li><a href="earrings.html"><span class="emoji">👂</span> Earrings</a></li>
-          <li><a href="necklaces.html" class="active"><span class="emoji">📿</span> Necklaces</a></li>
-          <li><a href="pendants.html"><span class="emoji">💎</span> Pendants</a></li>
-          <li class="dropdown-divider"></li>
-          <li><a href="bracelets.html"><span class="emoji">✨</span> Bracelets</a></li>
-          <li><a href="bangles.html"><span class="emoji">🔮</span> Bangles</a></li>
-        </ul>
+        <button class="nav-btn-plain" id="collectionsBtn" aria-expanded="false" aria-haspopup="true">
+          Collections <i class="fa-solid fa-chevron-down" style="color: var(--gold);"></i>
+        </button>
+        <div class="dropdown-menu" id="collectionsMenu" role="menu">
+          <a href="rings.html" role="menuitem"><span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]"><i class="fa-solid fa-ring" style="color: var(--gold);"></i> RINGS</span></a>
+          <a href="earrings.html" role="menuitem"><span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]"><i class="fa-solid fa-ear-listen" style="color: var(--gold);"></i> EARRINGS</span></a>
+          <a href="necklaces.html" class="active" role="menuitem"><span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]"><i class="fa-solid fa-link" style="color: var(--gold);"></i> NECKLACES</span></a>
+          <a href="pendants.html" role="menuitem"><span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]"><i class="fa-solid fa-gem" style="color: var(--gold);"></i> PENDANTS</span></a>
+          <div class="dropdown-divider"></div>
+          <a href="bracelets.html" role="menuitem"><span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]"><i class="fa-solid fa-circle-notch" style="color: var(--gold);"></i> BRACELETS</span></a>
+          <a href="bangles.html" role="menuitem"><span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]"><i class="fa-solid fa-circle" style="color: var(--gold);"></i> BANGLES</span></a>
+        </div>
       </li>
 
       <li><a href="#">About</a></li>
@@ -1418,6 +1418,41 @@
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 30);
     }, { passive: true });
+
+    /* ── Collections dropdown toggle ─────────────────────────── */
+    const collectionsBtn  = document.getElementById('collectionsBtn');
+    const collectionsMenu = document.getElementById('collectionsMenu');
+
+    function openDropdown() {
+      collectionsMenu.classList.add('open');
+      collectionsBtn.classList.add('open');
+      collectionsBtn.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeDropdown() {
+      collectionsMenu.classList.remove('open');
+      collectionsBtn.classList.remove('open');
+      collectionsBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    collectionsBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (collectionsMenu.classList.contains('open')) {
+        closeDropdown();
+      } else {
+        openDropdown();
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!collectionsBtn.contains(e.target) && !collectionsMenu.contains(e.target)) {
+        closeDropdown();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeDropdown();
+    });
 
     /* ── Scroll reveal for product cards ───────────────────── */
     const revealCards = () => {
