@@ -4,8 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pendants — AUREL JEWELS Luxury Jewelry</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap');
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
 
 :root {
   --gold: #D4AF37;
@@ -1045,31 +1047,29 @@ footer {
     <li><a href="store.html#shop">Curations</a></li>
     <!-- COLLECTIONS DROPDOWN -->
     <li class="nav-dropdown" id="collections-dropdown">
-      <button class="nav-dropdown-trigger" onclick="toggleDropdown()" aria-expanded="false">
+      <button class="nav-dropdown-trigger" id="collectionsBtn" aria-expanded="false" aria-haspopup="true">
         Collections
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="6 9 12 15 18 9"></polyline>
-        </svg>
+        <i class="fa-solid fa-chevron-down" style="color: var(--gold);"></i>
       </button>
-            <div class="nav-dropdown-menu" id="collections-menu">
-        <a href="rings.html" class="dropdown-item">
-          <i class="fa-solid fa-ring"></i> Rings
+      <div class="nav-dropdown-menu" id="collectionsMenu" role="menu">
+        <a href="rings.html" class="dropdown-item" role="menuitem">
+          <span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]"><i class="fa-solid fa-ring" style="color: var(--gold);"></i> RINGS</span>
         </a>
-        <a href="earrings.html" class="dropdown-item">
-          <i class="fa-solid fa-ear-listen"></i> Earrings
+        <a href="earrings.html" class="dropdown-item" role="menuitem">
+          <span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]"><i class="fa-solid fa-ear-listen" style="color: var(--gold);"></i> EARRINGS</span>
         </a>
-        <a href="necklaces.html" class="dropdown-item">
-          <i class="fa-solid fa-link"></i> Necklaces
+        <a href="necklaces.html" class="dropdown-item" role="menuitem">
+          <span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]"><i class="fa-solid fa-link" style="color: var(--gold);"></i> NECKLACES</span>
         </a>
-        <a href="pendants.html" class="dropdown-item">
-          <i class="fa-solid fa-gem"></i> Pendants
+        <a href="pendants.html" class="dropdown-item active-page" role="menuitem">
+          <span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]"><i class="fa-solid fa-gem" style="color: var(--gold);"></i> PENDANTS</span>
         </a>
         <div class="dropdown-divider"></div>
-        <a href="bracelets.html" class="dropdown-item">
-          <i class="fa-solid fa-circle-notch"></i> Bracelets
+        <a href="bracelets.html" class="dropdown-item" role="menuitem">
+          <span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]"><i class="fa-solid fa-circle-notch" style="color: var(--gold);"></i> BRACELETS</span>
         </a>
-        <a href="bangles.html" class="dropdown-item">
-          <i class="fa-solid fa-circle"></i> Bangles
+        <a href="bangles.html" class="dropdown-item" role="menuitem">
+          <span class="flex items-center gap-3 font-semibold text-[13px] uppercase tracking-[0.12em]"><i class="fa-solid fa-circle" style="color: var(--gold);"></i> BANGLES</span>
         </a>
       </div>
     </li>
@@ -1375,22 +1375,39 @@ const revealObserver = new IntersectionObserver((entries) => {
 revealElements.forEach(el => revealObserver.observe(el));
 
 // ─── Collections Dropdown Toggle ──────────────────────────────
-function toggleDropdown() {
-  const dropdown = document.getElementById('collections-dropdown');
-  const trigger = dropdown.querySelector('.nav-dropdown-trigger');
-  const isOpen = dropdown.classList.contains('open');
-  dropdown.classList.toggle('open');
-  trigger.setAttribute('aria-expanded', !isOpen);
+const dropdownEl  = document.getElementById('collections-dropdown');
+const dropdownBtn = document.getElementById('collectionsBtn');
+const dropdownMenu = document.getElementById('collectionsMenu');
+
+function openDropdown() {
+  dropdownMenu.classList.add('open');
+  dropdownBtn.classList.add('open');
+  dropdownBtn.setAttribute('aria-expanded', 'true');
 }
 
-// Close dropdown when clicking outside
-document.addEventListener('click', (e) => {
-  const dropdown = document.getElementById('collections-dropdown');
-  if (dropdown && !dropdown.contains(e.target)) {
-    dropdown.classList.remove('open');
-    const trigger = dropdown.querySelector('.nav-dropdown-trigger');
-    if (trigger) trigger.setAttribute('aria-expanded', 'false');
+function closeDropdown() {
+  dropdownMenu.classList.remove('open');
+  dropdownBtn.classList.remove('open');
+  dropdownBtn.setAttribute('aria-expanded', 'false');
+}
+
+dropdownBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  if (dropdownMenu.classList.contains('open')) {
+    closeDropdown();
+  } else {
+    openDropdown();
   }
+});
+
+document.addEventListener('click', (e) => {
+  if (!dropdownBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+    closeDropdown();
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeDropdown();
 });
 
 // ─── Filter chips ──────────────────────────────────────────────
