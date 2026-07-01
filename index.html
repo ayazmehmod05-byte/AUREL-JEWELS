@@ -1989,232 +1989,347 @@ footer {
   }
 }
 </style>
-  <style>
-    /* Task 5: THEME - Glass Effect for cards */
-    .product-card, .category-card, .contact-card, .engraving-preview-card, .metric-content-box, .collection-card, .item-card, .finish-selection-box {
-      background: rgba(255, 255, 255, 0.6) !important;
-      backdrop-filter: blur(10px) !important;
-      -webkit-backdrop-filter: blur(10px) !important;
-      border: 1px solid rgba(255,255,255,0.4) !important;
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07) !important;
+  <!-- ═══════════════════════════════════════════════════════════
+       RINGS-MATCHED DARK GOLD THEME OVERRIDE
+  ═══════════════════════════════════════════════════════════ -->
+  <style id="dark-rings-theme">
+    /* ── Base dark background — same as rings.html ─────────── */
+    html, body {
+      background: #0f0f11 !important;
+      background-color: #0f0f11 !important;
+      color: #FAF7F2 !important;
+      min-height: 100vh !important;
     }
-    
-    /* Ensure text is visible and layout correct */
-    .smart-showcase h2, .smart-showcase p, .smart-showcase h3, .smart-showcase li, .smart-showcase span {
-      color: #1a1a1a !important;
+
+    /* ── Navbar — transparent → dark on scroll ─────────────── */
+    nav {
+      background: transparent !important;
+      border-bottom: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
     }
+    nav.scrolled {
+      background: rgba(15, 15, 17, 0.96) !important;
+      backdrop-filter: blur(18px) !important;
+      -webkit-backdrop-filter: blur(18px) !important;
+      box-shadow: 0 2px 28px rgba(0,0,0,0.45) !important;
+      border-bottom: none !important;
+    }
+
+    /* ── Logo & nav text — white/gold on dark ──────────────── */
+    .logo, nav .logo { color: #ffffff !important; }
+    .logo span, nav .logo span { color: #D4AF37 !important; }
+    .nav-links a { color: rgba(255,255,255,0.82) !important; }
+    .nav-links a:hover { color: #D4AF37 !important; }
+    .nav-dropdown-trigger { color: rgba(255,255,255,0.82) !important; }
+    .cta-btn {
+      border-color: #D4AF37 !important;
+      color: #D4AF37 !important;
+      background: transparent !important;
+      border-radius: 30px !important;
+      backdrop-filter: none !important;
+    }
+    .cta-btn:hover {
+      background: #D4AF37 !important;
+      color: #0f0f11 !important;
+    }
+
+    /* ── Dropdown menu — dark glass ────────────────────────── */
+    .nav-dropdown-menu {
+      background: rgba(18, 16, 14, 0.97) !important;
+      border-color: rgba(212,175,55,0.18) !important;
+    }
+    .nav-dropdown-menu::before {
+      background: rgba(18, 16, 14, 0.97) !important;
+      border-color: rgba(212,175,55,0.18) !important;
+    }
+    .dropdown-item {
+      color: rgba(255,255,255,0.8) !important;
+    }
+    .dropdown-item:hover { color: #D4AF37 !important; background: rgba(212,175,55,0.1) !important; }
+
+    /* ── HERO SECTION ───────────────────────────────────────── */
+    .hero {
+      background: radial-gradient(circle at 60% 50%, #1a1410 0%, #0f0f11 100%) !important;
+      position: relative !important;
+      overflow: hidden !important;
+    }
+    .hero::before {
+      content: '' !important;
+      position: absolute !important;
+      inset: 0 !important;
+      background:
+        radial-gradient(circle at 15% 80%, rgba(212,175,55,0.08) 0%, transparent 45%),
+        radial-gradient(circle at 85% 20%, rgba(212,175,55,0.06) 0%, transparent 40%) !important;
+      pointer-events: none !important;
+      z-index: 1 !important;
+    }
+    .hero-container { position: relative !important; z-index: 2 !important; }
+    .hero-left, .hero-right { position: relative !important; z-index: 2 !important; }
+    .hero-left h1 { color: #ffffff !important; }
+    .hero-left .tagline { color: #D4AF37 !important; }
+    .hero-left .description { color: rgba(255,255,255,0.6) !important; }
+    .hero-left .cta-btn {
+      background: linear-gradient(135deg, #D4AF37, #e8cb6a) !important;
+      color: #0f0f11 !important;
+      border-color: #D4AF37 !important;
+      border-radius: 4px !important;
+    }
+
+    /* ── ALL SECTIONS — dark background ────────────────────── */
+    section {
+      background: #0f0f11 !important;
+      background-color: #0f0f11 !important;
+      position: relative !important;
+    }
+    section::before {
+      display: none !important;
+      background: none !important;
+    }
+
+    /* sections with bg images get dark overlay */
+    .smart-showcase, .engraving-section, .stacking-section,
+    .shop-section, .about-section, .categories-section {
+      background: #0f0f11 !important;
+    }
+
+    .bespoke-cta {
+      background: radial-gradient(circle, #1a1a20 0%, #0c0c0e 100%) !important;
+    }
+
+    .contact-section {
+      background: #0a0a0c !important;
+    }
+
+    /* ── HEADINGS & TEXT ────────────────────────────────────── */
+    h1, h2, h3, h4, h5, h6 {
+      color: #ffffff !important;
+    }
+    .sec-title h2, .hero h1 { color: #ffffff !important; }
+    .sec-title span { color: #D4AF37 !important; }
+    p { color: rgba(255,255,255,0.6) !important; }
+    .hero-left .description { color: rgba(255,255,255,0.6) !important; }
+
+    /* Override conflicting white text */
+    .smart-showcase h2, .smart-showcase h3,
+    .engraving-controls h3, .stack-controls-box h3,
+    .about-content h2, .bespoke-cta-content h2 {
+      color: #ffffff !important;
+    }
+
+    /* ── PRODUCT CARDS — glass on dark ─────────────────────── */
+    .product-card {
+      background: rgba(255,255,255,0.06) !important;
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+      border: 1px solid rgba(212,175,55,0.15) !important;
+      border-radius: 16px !important;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3) !important;
+    }
+    .product-card:hover {
+      transform: translateY(-8px) !important;
+      border-color: rgba(212,175,55,0.35) !important;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5) !important;
+    }
+    .product-info-box h3 { color: #ffffff !important; }
+    .product-info-box p.desc { color: rgba(255,255,255,0.55) !important; }
+
+    /* ── CATEGORY CARDS — glass on dark ─────────────────────── */
+    .category-card {
+      background: rgba(15,15,17,0.7) !important;
+      border: none !important;
+      border-radius: 0 !important;
+    }
+    .category-card::before {
+      background: rgba(10,10,12,0.5) !important;
+    }
+    .category-overlay {
+      background: rgba(15,15,17,0.75) !important;
+      border: 1px solid rgba(212,175,55,0.2) !important;
+      backdrop-filter: blur(14px) !important;
+    }
+    .category-overlay h3 { color: #ffffff !important; }
+    .category-overlay p { color: rgba(255,255,255,0.55) !important; }
+
+    /* ── GLASS CARDS (smart ring, engraving, stacking) ─────── */
+    .finish-selection-box, .metric-content-box,
+    .engraving-preview-card, .stack-canvas, .layer-toggle-row {
+      background: rgba(255,255,255,0.04) !important;
+      border: 1px solid rgba(212,175,55,0.12) !important;
+      box-shadow: none !important;
+    }
+
+    /* ── ABOUT IMAGE BOX ────────────────────────────────────── */
+    .about-img-box {
+      background: rgba(255,255,255,0.04) !important;
+      border: 1px solid rgba(212,175,55,0.12) !important;
+    }
+
+    /* ── CONTACT SECTION ────────────────────────────────────── */
+    .contact-card {
+      background: rgba(255,255,255,0.05) !important;
+      border: 1px solid rgba(212,175,55,0.2) !important;
+    }
+    .contact-card h3 { color: #ffffff !important; }
+    .contact-card p { color: rgba(255,255,255,0.5) !important; }
+    .contact-number { color: #D4AF37 !important; }
+    .contact-form-card {
+      background: rgba(255,255,255,0.05) !important;
+      border: 1px solid rgba(212,175,55,0.2) !important;
+    }
+    .contact-form-card h3 { color: #ffffff !important; }
+    .form-group label { color: rgba(255,255,255,0.6) !important; }
+    .form-group input, .form-group select, .form-group textarea {
+      background: rgba(255,255,255,0.06) !important;
+      border-color: rgba(212,175,55,0.2) !important;
+      color: #ffffff !important;
+    }
+
+    /* ── ENGRAVING SECTION ──────────────────────────────────── */
+    .engraving-section { background: #0f0f11 !important; }
+    .engraving-preview-card { background: rgba(255,255,255,0.04) !important; }
+    .engraving-controls h3 { color: #ffffff !important; }
+    .engrave-input {
+      background: rgba(255,255,255,0.06) !important;
+      border-color: rgba(212,175,55,0.2) !important;
+      color: #ffffff !important;
+    }
+    .font-btn {
+      background: rgba(255,255,255,0.06) !important;
+      border-color: rgba(212,175,55,0.15) !important;
+      color: rgba(255,255,255,0.7) !important;
+    }
+    .font-btn.active { border-color: #D4AF37 !important; color: #D4AF37 !important; }
+    .control-group label { color: rgba(255,255,255,0.7) !important; }
+    .metal-btn-mini {
+      background: rgba(255,255,255,0.06) !important;
+      border-color: rgba(212,175,55,0.15) !important;
+      color: rgba(255,255,255,0.7) !important;
+    }
+    .metal-btn-mini.active {
+      background: #D4AF37 !important;
+      color: #0f0f11 !important;
+      border-color: #D4AF37 !important;
+    }
+
+    /* ── STACKING SECTION ───────────────────────────────────── */
+    .stacking-section { background: #0f0f11 !important; }
+    .stack-canvas {
+      background: rgba(255,255,255,0.04) !important;
+      border-color: rgba(212,175,55,0.12) !important;
+      box-shadow: none !important;
+    }
+    .stack-controls-box h3 { color: #ffffff !important; }
+    .layer-toggle-row {
+      background: rgba(255,255,255,0.04) !important;
+      border-color: rgba(212,175,55,0.1) !important;
+      box-shadow: none !important;
+    }
+    .layer-meta h4 { color: #ffffff !important; }
+
+    /* ── SHOP SECTION ───────────────────────────────────────── */
+    .shop-section { background: #0f0f11 !important; }
+
+    /* ── ABOUT SECTION ──────────────────────────────────────── */
+    .about-section { background: #0f0f11 !important; }
+    .about-content h2 { color: #ffffff !important; }
+    .about-content p { color: rgba(255,255,255,0.6) !important; }
+
+    /* ── BOOKING MODAL ──────────────────────────────────────── */
+    .booking-box {
+      background: #1a1a20 !important;
+      border: 1px solid rgba(212,175,55,0.2) !important;
+      box-shadow: 0 30px 70px rgba(0,0,0,0.6) !important;
+    }
+    .booking-box h3, .booking-box p { color: #ffffff !important; }
+    .booking-box p { color: rgba(255,255,255,0.6) !important; }
+    .modal-close { color: rgba(255,255,255,0.5) !important; }
+    .modal-close:hover { color: #D4AF37 !important; }
+    .form-row .form-group input,
+    .form-row .form-group select,
+    .form-row .form-group textarea {
+      background: rgba(255,255,255,0.06) !important;
+      border-color: rgba(212,175,55,0.2) !important;
+      color: #ffffff !important;
+    }
+    .form-group label { color: rgba(255,255,255,0.7) !important; }
+
+    /* ── LIGHTBOX ───────────────────────────────────────────── */
+    .lightbox-content { background: transparent !important; border: none !important; }
+
+    /* ── BUTTONS — gold on dark ─────────────────────────────── */
+    .view-btn {
+      background: rgba(212,175,55,0.12) !important;
+      color: #D4AF37 !important;
+      border-color: rgba(212,175,55,0.3) !important;
+      border-radius: 4px !important;
+    }
+    .view-btn:hover {
+      background: #D4AF37 !important;
+      color: #0f0f11 !important;
+    }
+    .btn-gold-fill {
+      background: linear-gradient(135deg, #D4AF37, #e8cb6a) !important;
+      color: #0f0f11 !important;
+      border-color: #D4AF37 !important;
+    }
+
+    /* ── METRIC TABS ────────────────────────────────────────── */
+    .metric-tabs { border-bottom-color: rgba(255,255,255,0.1) !important; }
+    .tab-btn { color: rgba(255,255,255,0.5) !important; }
+    .tab-btn.active { color: #D4AF37 !important; }
+
+    /* ── STACKING SECTION TOGGLES ─────────────────────────── */
+    .toggle-switch-label { background-color: rgba(255,255,255,0.12) !important; }
+
+    /* ── SMART SHOWCASE ─────────────────────────────────────── */
+    .smart-showcase { background: #0f0f11 !important; color: #ffffff !important; }
+    .ring-features-container h2 { color: #ffffff !important; }
+    .ring-features-container .subtitle { color: rgba(255,255,255,0.6) !important; }
+    .metric-info h3 { color: #ffffff !important; }
+    .metric-details { color: rgba(255,255,255,0.6) !important; }
+    .metric-details span { color: #ffffff !important; }
+    .finish-selection-box h4 { color: #ffffff !important; }
+    #finish-text { color: rgba(255,255,255,0.5) !important; }
+    .finish-btn {
+      background: transparent !important;
+      backdrop-filter: none !important;
+      border-radius: 50% !important;
+      padding: 0 !important;
+    }
+    .btn-gold { background: radial-gradient(circle at 30% 30%, #ffd700, #b8860b) !important; }
+    .btn-stealth { background: radial-gradient(circle at 30% 30%, #555, #111) !important; }
+    .btn-rose { background: radial-gradient(circle at 30% 30%, #f0c2c2, #b76e79) !important; }
+    .btn-platinum { background: radial-gradient(circle at 30% 30%, #ffffff, #8a8a8a) !important; }
+
+    /* ── SCROLLBAR ──────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0f0f11; }
+    ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 3px; }
+
+    /* ── CANVAS TITLE ────────────────────────────────────────── */
+    .canvas-title { color: rgba(255,255,255,0.4) !important; }
+
+    /* ── SEC-TITLE ───────────────────────────────────────────── */
+    .sec-title h2 { color: #ffffff !important; }
+    .sec-title p { color: rgba(255,255,255,0.55) !important; }
+
+    /* ── PROMO STRIP ─────────────────────────────────────────── */
+    .promo-strip { background: #1a1a20 !important; border: none !important; }
+    .promo-strip-content h2 { color: #ffffff !important; }
+    .promo-strip-content p { color: rgba(255,255,255,0.55) !important; }
+
+    /* ── FEATURES STRIP ──────────────────────────────────────── */
+    .features-strip { background: #0a0a0c !important; border: none !important; }
+    .feature-item h4 { color: #ffffff !important; }
+    .feature-item p { color: rgba(255,255,255,0.5) !important; }
+
+    /* ── BESPOKE CTA ─────────────────────────────────────────── */
+    .bespoke-cta-content h2 { color: #ffffff !important; }
+    .bespoke-cta-content p { color: rgba(255,255,255,0.6) !important; }
   </style>
-    <style>
-     <style>
-/* === FINAL MINT THEME - Czn Wala Look === */
-html, body {
-    background: #10b981 !important;
-    background-color: #10b981 !important;
-    color: #ffffff !important;
-    min-height: 100% !important;
-    margin: 0 !important;
-}
-
-body {
-    background-image: 
-        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(110, 231, 183, 0.2) 0%, transparent 50%) !important;
-}
-
-/* Sab sections transparent karo */
-section, header, footer, main, div {
-    background: transparent !important;
-}
-
-/* Text white karo */
-h1, h2, h3, h4, h5, h6, p, span, a, li, .smart-showcase h2, .smart-showcase p {
-    color: #ffffff !important;
-}
-
-/* Cards white glass */
-.product-card, .category-card, .contact-card, .preview-box {
-    background: rgba(255, 255, 255, 0.2) !important;
-    backdrop-filter: blur(20px) !important;
-    -webkit-backdrop-filter: blur(20px) !important;
-    border: 1.5px solid rgba(255, 255, 255, 0.4) !important;
-    border-radius: 24px !important;
-}
-</style>
-      section > *, header > *, footer > *, main > * {
-          position: relative;
-          z-index: 1;
-      }
-      
-      /* All cards glass effect */
-      .product-card, .category-card, .contact-card, .engraving-preview-card, .metric-content-box, .collection-card, .item-card, .finish-selection-box {
-          background: rgba(255, 255, 255, 0.6) !important;
-          backdrop-filter: blur(10px) !important;
-          -webkit-backdrop-filter: blur(10px) !important;
-          border: 1px solid rgba(255,255,255,0.4) !important;
-          box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07) !important;
-      }
-      
-      
-      /* Text Colors override for white theme */
-      body, p, span, div, a, li { color: #1a1a1a; }
-      h1, h2, h3, h4, h5, h6, .sec-title h2, .hero h1, .smart-showcase h2, .logo { color: #1a1a1a !important; }
-      .category-overlay h3, .product-info-box h3 { color: #1a1a1a !important; }
-      .dropdown-item { color: #1a1a1a !important; }
-      .nav-links a { color: #1a1a1a !important; }
-
-      h1, h2, h3, h4, h5, h6, p, span, li, a {
-          color: #1a1a1a;
-      }
-      .sec-title h2, .hero h1, .smart-showcase h2, .logo {
-          color: #1a1a1a !important;
-      }
-    </style>
-
-    <style id="site-spacing-theme">
-      /* Transparent glass overlay — model backgrounds stay visible */
-      section::before, header::before, footer::before, main::before {
-        background: rgba(255, 255, 255, 0.42) !important;
-      }
-      .fixed-model-overlay {
-        background: rgba(255, 255, 255, 0.42) !important;
-      }
-      /* Reduced spacing sitewide */
-      .collection-section, .shop-section, .contact-section,
-      .smart-showcase, .about-section, .bespoke-cta,
-      .engraving-section, .stacking-section, .categories-section {
-        padding: 3.5rem 6% !important;
-      }
-      .contact-section { padding: 3.5rem 6% !important; }
-      .sec-title, .section-header { margin-bottom: 2rem !important; }
-      .category-hero { height: 300px !important; min-height: 300px !important; }
-      .page-hero { padding: 5rem 5% 3rem !important; }
-      .section-pad-top { padding-top: 4.5rem !important; }
-      .features-strip, .promo-strip, .category-strip { margin: 0 !important; }
-      /* Rings-matched product grid for pendants / bracelets / bangles */
-      .product-grid {
-        grid-template-columns: repeat(3, 1fr) !important;
-        gap: 2.5rem !important;
-        max-width: none !important;
-        margin: 0 !important;
-      }
-      .product-img-box {
-        height: 280px !important;
-        aspect-ratio: unset !important;
-      }
-      .product-img-box img {
-        width: 100% !important;
-        height: 300px !important;
-        object-fit: cover !important;
-        border-radius: 12px !important;
-        display: block !important;
-      }
-      .card-image { height: 280px !important; }
-      .card-image img {
-        width: 100% !important;
-        height: 300px !important;
-        object-fit: cover !important;
-      }
-      /* === MINT + CRYSTAL GLASS THEME === */
-:root {
-    --mint: #10b981;
-    --mint-light: #6ee7b7; 
-    --mint-dark: #047857;
-    --glass: rgba(255, 255, 255, 0.2);
-    --glass-border: rgba(255, 255, 255, 0.3);
-}
-
-body {
-    background: #10b981 !important; /* Full Sea Green */
-    background-image: 
-        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(110, 231, 183, 0.2) 0%, transparent 50%) !important;
-    color: #ffffff !important;
-}
-/* iOS Crystal Glass Cards */
-.product-card, .category-card, .card {
-    background: var(--glass) !important;
-    backdrop-filter: blur(16px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
-    border: 1px solid var(--glass-border) !important;
-    border-radius: 20px !important;
-    box-shadow: 0 8px 32px rgba(16, 185, 129, 0.1) !important;
-    transition: all 0.3s ease !important;
-}
-
-.product-card:hover, .category-card:hover {
-    transform: translateY(-8px) !important;
-    box-shadow: 0 16px 48px rgba(16, 185, 129, 0.2) !important;
-    border: 1px solid var(--mint) !important;
-}
-
-/* iOS Crystal Glass Buttons */
-button, .btn, .add-to-cart {
-    background: var(--glass) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    border: 1px solid var(--glass-border) !important;
-    border-radius: 14px !important;
-    padding: 12px 24px !important;
-    color: var(--mint-dark) !important;
-    font-weight: 600 !important;
-    transition: all 0.3s ease !important;
-    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.15) !important;
-}
-
-button:hover, .btn:hover, .add-to-cart:hover {
-    background: rgba(16, 185, 129, 0.15) !important;
-    border: 1px solid var(--mint) !important;
-    transform: scale(1.05) !important;
-}
-
-/* Header/Navbar Glass */
-header, .navbar {
-    background: rgba(255, 255, 255, 0.7) !important;
-    backdrop-filter: blur(20px) !important;
-    border-bottom: 1px solid rgba(16, 185, 129, 0.1) !important;
-}
-/* === OVERRIDE: FORCE MINT + REMOVE WHITE === */
-html {
-    background: #10b981 !important;
-    background-color: #10b981 !important;
-    height: 100% !important;
-}
-
-body {
-    background: #10b981 !important;
-    background-color: #10b981 !important;
-    background-image: 
-        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(110, 231, 183, 0.2) 0%, transparent 50%) !important;
-    color: #ffffff !important;
-    min-height: 100vh !important;
-}
-
-/* First Page Ke White Sections Ko Khatam Karo */
-.hero, .main-banner, .banner, section:first-of-type,
-.hero::before, .main-banner::before, section::before {
-    background: transparent !important;
-    background-color: transparent !important;
-    background-image: none !important;
-}
-
-/* Navbar Mint Glass Karo - White Hatao */
-header, .navbar, nav {
-    background: rgba(255, 255, 255, 0.15) !important;
-    backdrop-filter: blur(20px) !important;
-    -webkit-backdrop-filter: blur(20px) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
-}
-
-/* Text White Karo */
-h1, h2, h3, p, span, a, .logo, .nav-links a {
-    color: #ffffff !important;
-}
-
-.logo span {
-    color: #f0fdf4 !important;
-}
-    </style>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>e>
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
