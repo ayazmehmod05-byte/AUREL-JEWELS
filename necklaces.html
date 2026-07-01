@@ -1698,6 +1698,68 @@
     }
   }
 </style>
+  <style id="mint-theme-override">
+    /* === FINAL MINT THEME - Czn Wala Look === */
+    html, body {
+      background: #10b981 !important;
+      background-color: #10b981 !important;
+      color: #ffffff !important;
+      min-height: 100vh !important;
+      margin: 0 !important;
+    }
+    body {
+      background-image: 
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(110, 231, 183, 0.2) 0%, transparent 50%) !important;
+    }
+    section, header, footer, main, div.hero, div.smart-showcase, div.engraving-section {
+      background: transparent !important;
+      background-color: transparent !important;
+      background-image: none !important;
+    }
+    section::before, .hero::before, .category-hero::before {
+      display: none !important;
+    }
+    h1, h2, h3, h4, h5, h6, p, span, a, li, 
+    .smart-showcase h2, .smart-showcase p, .sec-title h2, .hero h1, 
+    .logo, .category-overlay h3, .product-info-box h3, .dropdown-item, .nav-links a {
+      color: #ffffff !important;
+    }
+    .logo span { color: #f0fdf4 !important; }
+    .product-card, .category-card, .contact-card, .preview-box, 
+    .engraving-preview-card, .metric-content-box, .collection-card, 
+    .item-card, .finish-selection-box, .booking-box, .about-img-box {
+      background: rgba(255, 255, 255, 0.2) !important;
+      backdrop-filter: blur(20px) !important;
+      -webkit-backdrop-filter: blur(20px) !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.4) !important;
+      border-radius: 24px !important;
+      box-shadow: 0 8px 32px rgba(16, 185, 129, 0.1) !important;
+    }
+    .product-card:hover, .category-card:hover {
+      transform: translateY(-8px) !important;
+      box-shadow: 0 16px 48px rgba(16, 185, 129, 0.2) !important;
+      border: 1px solid #10b981 !important;
+    }
+    header, .navbar, nav {
+      background: rgba(255, 255, 255, 0.15) !important;
+      backdrop-filter: blur(20px) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+    }
+    .nav-dropdown-menu { background: rgba(16, 185, 129, 0.9) !important; }
+    .dropdown-item:hover { background: rgba(255,255,255,0.2) !important; color: #fff !important; }
+    .view-btn, .quick-add-btn, .btn-gold-fill, .contact-card-btn, .contact-submit-btn, .cta-btn {
+      background: rgba(255, 255, 255, 0.25) !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(255, 255, 255, 0.5) !important;
+      backdrop-filter: blur(10px) !important;
+    }
+    .view-btn:hover, .quick-add-btn:hover, .btn-gold-fill:hover, .contact-card-btn:hover, .contact-submit-btn:hover, .cta-btn:hover {
+      background: rgba(255, 255, 255, 0.4) !important;
+      color: #10b981 !important;
+      border-color: #ffffff !important;
+    }
+  </style>
 </head>
 <body>
 
@@ -2262,3 +2324,4 @@ function handleContactSubmit(e) {
 </script>
 </body>
 </html>
+
