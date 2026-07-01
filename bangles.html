@@ -210,7 +210,7 @@
       border: 1px solid rgba(212,175,55,0.12);
     }
     .hero-deco::after {
-      content: '🔮';
+      content: '';
       font-size: 4.5rem;
       line-height: 1;
     }
@@ -594,66 +594,196 @@
       .contact-grid { grid-template-columns: 1fr; }
     }
   </style>
+  
+  
+  
+  
+  
+  
+  
+  
+  
   <style id="mint-theme-override">
-    /* === FINAL MINT THEME - Czn Wala Look === */
-    html, body {
-      background: #10b981 !important;
-      background-color: #10b981 !important;
-      color: #ffffff !important;
-      min-height: 100vh !important;
-      margin: 0 !important;
+    /* === REFINED MINT THEME + STRUCTURAL FIXES === */
+    :root {
+      --mint-bg: #10b981;
+      --mint-dark: #000000;
+      --mint-glass: rgba(16, 185, 129, 0.95);
+      --card-glass: rgba(255, 255, 255, 0.12);
     }
-    body {
-      background-image: 
-        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(110, 231, 183, 0.2) 0%, transparent 50%) !important;
+    
+    html, body { background: var(--mint-bg) !important; background-color: var(--mint-bg) !important; color: #000000 !important; margin:0 !important; padding:0 !important; overflow-x: hidden !important;}
+    body { background-image: none !important; }
+
+    /* Disable Scroll Reveal & AOS Animations */
+    .reveal, [data-aos] {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
     }
-    section, header, footer, main, div.hero, div.smart-showcase, div.engraving-section {
+
+    /* Transparent Sections */
+    section, main, .hero, .category-hero, .smart-showcase, .smart-showcase-grid, .engraving-section,
+    .stacking-section, .categories-section, .about-section, .bespoke-cta,
+    .contact-section, .shop-section, .collection-section, .products-section,
+    [class*="-section"], [class*="-cta"] {
       background: transparent !important;
       background-color: transparent !important;
       background-image: none !important;
     }
-    section::before, .hero::before, .category-hero::before {
-      display: none !important;
+    section::before, .hero::before, .category-hero::before { display: none !important; }
+
+    /* Typography (Black) */
+    h1, h2, h3, h4, h5, h6, .sec-title h2, .hero h1, .smart-showcase h2, .logo, .nav-logo { color: #000000 !important; }
+    p, span, li, .subtitle { color: #000000 !important; }
+    .logo span, .nav-logo span { color: #047857 !important; }
+    .section-desc, .section-label, .hero-label, .hero-breadcrumb, .hero-breadcrumb a { color: #000000 !important; }
+
+    /* Navbar - Scrolled Glass & Layout Fixes */
+    .navbar, nav#navbar, #navbar { 
+        background: transparent !important; 
+        border-bottom: 1px solid rgba(0,0,0,0.1) !important; 
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 1.2rem 5% !important;
+        flex-wrap: nowrap !important;
+        position: fixed !important;
+        top: 0 !important;
+        width: 100% !important;
+        z-index: 1000 !important;
     }
-    h1, h2, h3, h4, h5, h6, p, span, a, li, 
-    .smart-showcase h2, .smart-showcase p, .sec-title h2, .hero h1, 
-    .logo, .category-overlay h3, .product-info-box h3, .dropdown-item, .nav-links a {
-      color: #ffffff !important;
-    }
-    .logo span { color: #f0fdf4 !important; }
-    .product-card, .category-card, .contact-card, .preview-box, 
-    .engraving-preview-card, .metric-content-box, .collection-card, 
-    .item-card, .finish-selection-box, .booking-box, .about-img-box {
-      background: rgba(255, 255, 255, 0.2) !important;
+    .navbar.scrolled, nav#navbar.scrolled, #navbar.scrolled {
+      background: var(--mint-glass) !important;
       backdrop-filter: blur(20px) !important;
       -webkit-backdrop-filter: blur(20px) !important;
-      border: 1.5px solid rgba(255, 255, 255, 0.4) !important;
-      border-radius: 24px !important;
-      box-shadow: 0 8px 32px rgba(16, 185, 129, 0.1) !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+      border-bottom: none !important;
     }
-    .product-card:hover, .category-card:hover {
-      transform: translateY(-8px) !important;
-      box-shadow: 0 16px 48px rgba(16, 185, 129, 0.2) !important;
-      border: 1px solid #10b981 !important;
+    .nav-links { display: flex !important; gap: 2rem !important; align-items: center !important; list-style: none !important; margin: 0 !important; padding: 0 !important; }
+    .nav-links > li > a, .nav-btn-plain { color: #000000 !important; text-decoration: none !important; font-weight: 500 !important; font-size: 0.9rem !important; }
+    .nav-links > li > a:hover, .nav-btn-plain:hover { color: #047857 !important; }
+    
+    /* Dropdown Menu Fixes */
+    .nav-dropdown, .has-dropdown, .nav-links li { position: relative !important; }
+    .dropdown-menu, .nav-dropdown-menu { 
+        display: none !important; 
+        position: absolute !important; 
+        top: 100% !important; 
+        left: 50% !important; 
+        transform: translateX(-50%) !important; 
+        min-width: 320px !important; 
+        background: var(--mint-glass) !important; 
+        border: 1px solid rgba(0,0,0,0.2) !important; 
+        border-radius: 12px !important; 
+        padding: 1rem !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 0.5rem !important;
+        z-index: 1000 !important;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.1) !important;
     }
-    header, .navbar, nav {
-      background: rgba(255, 255, 255, 0.15) !important;
-      backdrop-filter: blur(20px) !important;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+    .nav-dropdown:hover .dropdown-menu, .nav-dropdown:hover .nav-dropdown-menu,
+    .has-dropdown:hover .dropdown-menu, .nav-links li:hover .dropdown-menu, 
+    .nav-links li:hover .nav-dropdown-menu,
+    .dropdown-menu.open, .nav-dropdown-menu.open { display: grid !important; }
+    .dropdown-menu a, .dropdown-item { color: #000000 !important; display: flex !important; align-items: center !important; gap: 8px !important; padding: 8px !important; text-decoration: none !important; border-radius: 6px !important; }
+    .dropdown-menu a:hover, .dropdown-item:hover { background: rgba(0,0,0,0.1) !important; }
+    .dropdown-item svg, .dropdown-item img { width: 18px !important; height: 18px !important; flex-shrink: 0 !important; fill: #000000 !important;}
+    .dropdown-menu a span, .dropdown-item span { font-size: 1.1rem !important; margin-right: 4px !important; }
+
+    /* Cards - Transparent Glass, Black Text */
+    .product-card, .category-card, .contact-card, .engraving-preview-card, 
+    .metric-content-box, .finish-selection-box, .booking-box,
+    .preview-box, .stack-canvas, .engraving-controls, .stack-controls-box {
+      background: var(--card-glass) !important;
+      backdrop-filter: blur(25px) !important;
+      border: 1px solid rgba(255, 255, 255, 0.25) !important;
+      border-radius: 16px !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+      overflow: hidden !important;
     }
-    .nav-dropdown-menu { background: rgba(16, 185, 129, 0.9) !important; }
-    .dropdown-item:hover { background: rgba(255,255,255,0.2) !important; color: #fff !important; }
-    .view-btn, .quick-add-btn, .btn-gold-fill, .contact-card-btn, .contact-submit-btn, .cta-btn {
-      background: rgba(255, 255, 255, 0.25) !important;
+    
+    /* Force text INSIDE cards to be readable (Black) */
+    .product-card h3, .product-card .card-name, .category-card h3, 
+    .contact-card h3, .engraving-preview-card h3, .metric-info h3, 
+    .booking-box h3, .contact-form-card h3, .card-price, .form-group label,
+    .product-card p, .category-card p, .contact-card p, 
+    .metric-info p, .metric-details li, .booking-box p,
+    .card-price-sub, .metric-details span, .category-overlay h3, .category-overlay p {
+      color: #000000 !important;
+    }
+    
+    /* Form Inputs */
+    .contact-form-card { background: var(--card-glass) !important; padding: 2rem !important; border-radius: 16px !important;}
+    .form-group { margin-bottom: 1rem !important;}
+    .form-group input, .form-group textarea, .form-group select, .engrave-input {
+      background: rgba(255,255,255,0.9) !important;
+      border: 1px solid rgba(16, 185, 129, 0.3) !important;
+      color: #1e293b !important;
+      width: 100% !important;
+      padding: 10px !important;
+      border-radius: 8px !important;
+    }
+
+    /* Buttons inside cards */
+    .quick-add-btn, .view-btn, .contact-submit-btn, .contact-card-btn, .nav-cta, .cta-btn {
+      background: #000000 !important;
       color: #ffffff !important;
-      border: 1px solid rgba(255, 255, 255, 0.5) !important;
-      backdrop-filter: blur(10px) !important;
+      border: none !important;
+      display: inline-block !important;
+      text-align: center !important;
+      padding: 10px 20px !important;
+      border-radius: 8px !important;
+      text-decoration: none !important;
+      font-weight: 500 !important;
+      cursor: pointer !important;
     }
-    .view-btn:hover, .quick-add-btn:hover, .btn-gold-fill:hover, .contact-card-btn:hover, .contact-submit-btn:hover, .cta-btn:hover {
-      background: rgba(255, 255, 255, 0.4) !important;
-      color: #10b981 !important;
-      border-color: #ffffff !important;
+    .quick-add-btn:hover, .view-btn:hover, .contact-submit-btn:hover, .contact-card-btn:hover, .nav-cta:hover, .cta-btn:hover {
+      background: #222222 !important;
+    }
+
+    /* Contact Grid stretch */
+    .contact-grid { 
+      display: grid !important; 
+      grid-template-columns: 1fr 1fr !important; 
+      gap: 3rem !important; 
+      align-items: stretch !important;
+    }
+    .contact-card { 
+      display: flex !important; 
+      flex-direction: column !important; 
+      justify-content: center !important; 
+      height: 100% !important; 
+      gap: 2rem !important;
+    }
+    .contact-method { display: flex !important; align-items: flex-start !important; gap: 1.5rem !important; margin-bottom: 0 !important; background: transparent !important;}
+    .contact-icon img, .contact-icon svg, .contact-icon { width: 48px !important; height: 48px !important; object-fit: contain !important; flex-shrink: 0 !important; }
+    a.contact-icon { display: inline-block !important; transition: transform 0.2s ease !important; cursor: pointer !important; }
+    a.contact-icon:hover { transform: scale(1.1) !important; }
+    .contact-number { font-weight: 600 !important; margin: 0.5rem 0 1rem 0 !important; color: #000000 !important; }
+
+    /* Footer */
+    .footer, footer {
+      background: rgba(4, 120, 87, 0.9) !important;
+      border-top: 1px solid rgba(255,255,255,0.2) !important;
+      color: rgba(255,255,255,0.85) !important;
+    }
+    .footer-col-title, .footer-brand-logo, .footer h4 { color: #ffffff !important; }
+    .footer-links a, .footer a { color: rgba(255,255,255,0.7) !important; }
+    .footer-links a:hover, .footer a:hover { color: #ffffff !important; }
+
+    /* Mobile First Adjustments */
+    @media (max-width: 900px) {
+      /* Navbar Mobile */
+      .navbar, nav#navbar, #navbar { padding: 1rem 5% !important; flex-wrap: wrap !important; }
+      .nav-links { display: none !important; }
+      /* Collections Grid Mobile */
+      .product-grid, .smart-showcase-grid, .engraving-container { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+      /* Contact Grid Mobile */
+      .contact-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+      .contact-method { flex-direction: column !important; align-items: center !important; text-align: center !important; }
+      .contact-icon img, .contact-icon svg { width: 60px !important; height: 60px !important; }
+      .page-hero { padding-top: 6rem !important; }
     }
   </style>
 </head>
@@ -673,13 +803,13 @@
           Collections <span class="chevron">&#8964;</span>
         </button>
         <div class="dropdown-menu" id="collectionsMenu">
-          <a href="rings.html"><span>💍</span> Rings</a>
-          <a href="earrings.html"><span>👂</span> Earrings</a>
-          <a href="necklaces.html"><span>📿</span> Necklaces</a>
-          <a href="pendants.html"><span>💎</span> Pendants</a>
+          <a href="rings.html"><span></span> Rings</a>
+          <a href="earrings.html"><span></span> Earrings</a>
+          <a href="necklaces.html"><span></span> Necklaces</a>
+          <a href="pendants.html"><span></span> Pendants</a>
           <div class="dropdown-divider"></div>
-          <a href="bracelets.html"><span>✨</span> Bracelets</a>
-          <a href="bangles.html" class="active"><span>🔮</span> Bangles</a>
+          <a href="bracelets.html"><span></span> Bracelets</a>
+          <a href="bangles.html" class="active"><span></span> Bangles</a>
         </div>
       </li>
       <li><a href="index.html#stack-builder">Styling Guide</a></li>
@@ -818,7 +948,7 @@
     <div class="contact-grid">
       <div class="contact-card reveal">
         <div class="contact-method">
-          <div class="contact-icon"><img src="images/png whatsapp logo.png" alt="WhatsApp"></div>
+          <a href="https://wa.me/923296430927" target="_blank" class="contact-icon"><img src="images/png whatsapp logo.png" alt="WhatsApp"></a>
           <div>
             <h3>WhatsApp Chat Support</h3>
             <p>Quick sizing help, order updates, and product questions.</p>
@@ -827,7 +957,7 @@
           </div>
         </div>
         <div class="contact-method">
-          <div class="contact-icon"><img src="images/gmail png logo.png" alt="Email"></div>
+          <a href="mailto:ayazmehmod05@gmail.com" class="contact-icon"><img src="images/gmail png logo.png" alt="Email"></a>
           <div>
             <h3>Email Consultation</h3>
             <p>Custom orders, wholesale requests, and detailed inquiries.</p>
@@ -883,12 +1013,12 @@
       <div>
         <h4 class="footer-col-title">Our Offerings</h4>
         <nav class="footer-links">
-          <a href="rings.html">💍 Rings</a>
-          <a href="earrings.html">👂 Earrings</a>
-          <a href="necklaces.html">📿 Necklaces</a>
-          <a href="pendants.html">💎 Pendants</a>
-          <a href="bracelets.html">✨ Bracelets</a>
-          <a href="bangles.html">🔮 Bangles</a>
+          <a href="rings.html"> Rings</a>
+          <a href="earrings.html"> Earrings</a>
+          <a href="necklaces.html"> Necklaces</a>
+          <a href="pendants.html"> Pendants</a>
+          <a href="bracelets.html"> Bracelets</a>
+          <a href="bangles.html"> Bangles</a>
         </nav>
       </div>
       <div>
@@ -950,4 +1080,13 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
 
