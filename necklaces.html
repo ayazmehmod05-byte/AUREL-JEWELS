@@ -718,7 +718,7 @@
     }
     @media (max-width: 768px) {
       .navbar { padding: 0 24px; }
-      .nav-links, .nav-actions { display: none; }
+
       .page-hero { height: 300px; }
       .section-wrap { padding: 48px 24px 72px; }
       .product-grid { grid-template-columns: 1fr; }
@@ -1134,7 +1134,6 @@
     @media (max-width: 900px) {
       /* Navbar Mobile */
       .navbar, nav#navbar, #navbar { padding: 1rem 5% !important; flex-wrap: wrap !important; }
-      .nav-links { display: none !important; }
       /* Collections Grid Mobile */
       .product-grid, .smart-showcase-grid, .engraving-container { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
       /* Contact Grid Mobile */
@@ -1142,6 +1141,159 @@
       .contact-method { flex-direction: column !important; align-items: center !important; text-align: center !important; }
       .contact-icon img, .contact-icon svg { width: 60px !important; height: 60px !important; }
       .page-hero { padding-top: 6rem !important; }
+    }
+
+    /* ═══ HAMBURGER MENU & MOBILE SIDEBAR ═══ */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 44px;
+      height: 44px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 1100;
+      padding: 0;
+      gap: 5px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2.5px;
+      background: var(--white, #ffffff);
+      border-radius: 3px;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-origin: center;
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(7.5px) rotate(45deg);
+      background: var(--gold);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-7.5px) rotate(-45deg);
+      background: var(--gold);
+    }
+    .mobile-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 1040;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .mobile-overlay.active { opacity: 1; }
+    .mobile-sidebar {
+      display: none;
+      position: fixed;
+      top: 0;
+      right: -320px;
+      width: 300px;
+      max-width: 85vw;
+      height: 100vh;
+      height: 100dvh;
+      background: rgba(15,15,17,0.97);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      z-index: 1050;
+      padding: 90px 30px 40px;
+      overflow-y: auto;
+      transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: -10px 0 40px rgba(0,0,0,0.3);
+      border-left: 1px solid rgba(212,175,55,0.15);
+    }
+    .mobile-sidebar.active { right: 0; }
+    .mobile-sidebar a,
+    .mobile-sidebar button.mobile-dropdown-trigger {
+      display: block;
+      padding: 14px 0;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      transition: color 0.25s ease, padding-left 0.25s ease;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+    }
+    .mobile-sidebar a:hover,
+    .mobile-sidebar button.mobile-dropdown-trigger:hover {
+      color: var(--gold);
+      padding-left: 8px;
+    }
+    .mobile-dropdown-trigger {
+      display: flex !important;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .mobile-dropdown-trigger .chevron-icon {
+      transition: transform 0.3s ease;
+      color: var(--gold);
+      font-size: 0.7rem;
+    }
+    .mobile-dropdown-trigger.open .chevron-icon {
+      transform: rotate(180deg);
+    }
+    .mobile-dropdown-items {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .mobile-dropdown-items.open { max-height: 400px; }
+    .mobile-dropdown-items a {
+      padding: 10px 0 10px 20px !important;
+      font-size: 0.82rem !important;
+      letter-spacing: 1.2px !important;
+      border-bottom: 1px solid rgba(255,255,255,0.04) !important;
+      color: rgba(255,255,255,0.6) !important;
+    }
+    .mobile-dropdown-items a:hover {
+      color: var(--gold) !important;
+      padding-left: 28px !important;
+    }
+    .mobile-sidebar .mobile-cta {
+      display: block;
+      margin-top: 24px;
+      padding: 14px 28px;
+      background: var(--gold);
+      color: #fff;
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    .mobile-sidebar .mobile-cta:hover {
+      background: #c9a530;
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 900px) {
+      .hamburger { display: flex !important; }
+      .mobile-sidebar { display: block !important; }
+      .mobile-overlay { display: block !important; }
+      .nav-links { display: none !important; }
+      .nav-actions { display: none !important; }
     }
   </style>
 </head>
@@ -1190,7 +1342,38 @@
   <div class="nav-actions">
     <a href="store.html#contact" class="cta-btn">Custom Inquiry</a>
   </div>
+  <!-- HAMBURGER BUTTON -->
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 </nav>
+
+<!-- MOBILE OVERLAY -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<!-- MOBILE SIDEBAR MENU -->
+<div class="mobile-sidebar" id="mobileSidebar">
+  <a href="store.html" onclick="closeMobileMenu()">Home</a>
+  <a href="store.html#smart-ring" onclick="closeMobileMenu()">Smart Wearables</a>
+  <a href="store.html#shop" onclick="closeMobileMenu()">Curations</a>
+  <button class="mobile-dropdown-trigger" onclick="toggleMobileDropdown(this)">
+    Collections <span class="chevron-icon">▼</span>
+  </button>
+  <div class="mobile-dropdown-items" id="mobileCollections">
+    <a href="rings.html">Rings</a>
+    <a href="earrings.html">Earrings</a>
+    <a href="necklaces.html" style="color: var(--gold) !important;">Necklaces</a>
+    <a href="pendants.html">Pendants</a>
+    <a href="bracelets.html">Bracelets</a>
+    <a href="bangles.html">Bangles</a>
+  </div>
+  <a href="store.html#stack-builder" onclick="closeMobileMenu()">Styling Guide</a>
+  <a href="store.html#about" onclick="closeMobileMenu()">Our Brand</a>
+  <a href="store.html#contact" onclick="closeMobileMenu()">Contact</a>
+  <a href="store.html#contact" class="mobile-cta">Custom Inquiry</a>
+</div>
 
   <!-- ══════════════════════════════════════════════════════════
        PAGE HERO
@@ -1696,6 +1879,43 @@
 
     /* ── Init ──────────────────────────────────────────────── */
     document.addEventListener('DOMContentLoaded', revealCards);
+
+    // === HAMBURGER MENU TOGGLE ===
+    (function() {
+      const hamburger = document.getElementById('hamburgerBtn');
+      const sidebar = document.getElementById('mobileSidebar');
+      const overlay = document.getElementById('mobileOverlay');
+      
+      function openMobileMenu() {
+        hamburger.classList.add('active');
+        sidebar.classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeMobileMenuFn() {
+        hamburger.classList.remove('active');
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+      window.closeMobileMenu = closeMobileMenuFn;
+      
+      hamburger.addEventListener('click', function() {
+        if (sidebar.classList.contains('active')) {
+          closeMobileMenuFn();
+        } else {
+          openMobileMenu();
+        }
+      });
+      overlay.addEventListener('click', closeMobileMenuFn);
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && sidebar.classList.contains('active')) closeMobileMenuFn();
+      });
+      window.toggleMobileDropdown = function(btn) {
+        btn.classList.toggle('open');
+        btn.nextElementSibling.classList.toggle('open');
+      };
+    })();
   </script>
 
 <script>
